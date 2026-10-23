@@ -1,0 +1,62 @@
+# 构建产物
+build/
+build-*/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+build.ninja
+.ninja_deps
+.ninja_log
+compile_commands.json
+
+# 编译中间产物
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.gcda
+*.gcno
+*.gcov
+
+# submodule 工作树（gitlink 已跟踪实体，无需再跟踪其内容）
+reference/*/
+!reference/*/README.md
+
+# 测试与运行时数据
+test-results/
+*.db
+*.db.wal
+*.db.bin
+test_dir/
+test_data/
+data/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 日志与临时文件
+*_out.txt
+*_err.txt
+err.txt
+out.txt
+temp_*.txt
+temp_*.cpp
+*.bak
+.DS_Store
