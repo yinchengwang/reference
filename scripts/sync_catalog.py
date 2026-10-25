@@ -20,8 +20,18 @@ import sys
 CATALOG_RELPATH = os.path.join("reference", "catalog.yml")
 MANIFEST_RELPATH = os.path.join("reference", "fetch-manifest.txt")
 
-MANIFEST_HEADER = "# model\tname\tclone_url\tcommit\tpin_status"
 MANIFEST_COLUMNS = ("model", "name", "clone_url", "commit", "pin_status")
+MANIFEST_HEADER = "# " + "\t".join(MANIFEST_COLUMNS)
+
+# 设计文档 §5.5.2 的一致性校验规则（1~9）里要检查的字段
+REQUIRED_KEYS = ("name", "model", "tier", "repository", "license", "status", "notes")
+PIN_STATUSES = ("valid", "broken", "unresolvable")
+SOURCES = ("mirror", "none")
+_SHA_RE = re.compile(r"[0-9a-f]{40}")
+
+
+class CatalogError(Exception):
+    """catalog / 仓库状态异常（向用户报一行人话，而不是抛 traceback）。"""
 
 # --- Step 5：人工实测确认的 pin 状态表（逐字取自任务书，不得自动推断） ---
 # name -> (pin_status, commit, clone_url)
@@ -116,12 +126,26 @@ def render_manifest(entries):
     return "\n".join(lines) + "\n"
 
 
+def _norm_eol(text):
+    """把 CRLF 归一化成 LF。
+
+    仓内 blob 是 LF，但 Windows 工作区因 core.autocrlf=true 会是 CRLF ——
+    比对前必须归一化，否则同一份内容会因行尾差异被判为「不一致」。
+    """
+    return text.replace("\r\n", "\n")
+
+
 def _gitlinks(repo_root):
     """读取 gitlink（mode 160000）路径 -> SHA 映射。"""
-    out = subprocess.run(
-        ["git", "-C", repo_root, "ls-files", "-s"],
-        capture_output=True, text=True, check=True,
-    ).stdout
+    try:
+        out = subprocess.run(
+            ["git", "-C", repo_root, "ls-files", "-s"],
+            capture_output=True, text=True, check=True,
+        ).stdout
+    except FileNotFoundError:
+        raise CatalogError("找不到 git 可执行文件")
+    except subprocess.CalledProcessError:
+        raise CatalogError("%s 不是 git 仓库（或尚未 git init），无法读取 gitlink" % repo_root)
     links = {}
     for line in out.split("\n"):
         if not line.startswith("160000"):
@@ -154,7 +178,9 @@ def compute_entries(repo_root):
         entries = parse_catalog(fh.read())
     links = _gitlinks(repo_root)
     for entry in entries:
-        name = entry["name"]
+        name = entry.get("name")
+        if not name:
+            raise CatalogError("catalog 里有条目缺少 name 字段：%r" % (entry,))
         path = "reference/%s/%s" % (entry.get("model"), name)
         sha = links.get(path)
         if name in PIN_OVERRIDES:
@@ -211,9 +237,11 @@ def _catalog_text(repo_root, entries):
     catalog_path = os.path.join(repo_root, CATALOG_RELPATH)
     with open(catalog_path, "r", encoding="utf-8", newline="") as fh:
         raw = fh.read()
-    eol = "\r\n" if "\r\n" in raw else "\n"
-    trailing = raw.endswith(eol)
-    lines = raw.split(eol)
+    # 行尾：取占多数的那种，按它重建（混合行尾时不再把整个文件当成一行）
+    eol = "\r\n" if raw.count("\r\n") * 2 > raw.count("\n") else "\n"
+    normalized = _norm_eol(raw)
+    trailing = normalized.endswith("\n")
+    lines = normalized.split("\n")
     if trailing:
         lines = lines[:-1]
 
@@ -296,6 +324,85 @@ def write_manifest(repo_root):
     return manifest_path
 
 
+def check_schema(entries):
+    """校验 catalog 的字段级不变量。
+
+    对应设计文档 §5.5.2「一致性校验规则」的 1/3/4/5/6/7 条：
+      1. 每条必须有非空 pin_status，取值在 {valid, broken, unresolvable}
+      3. broken  → commit 允许为 null，但 notes 必须说明失效原因与受影响的笔记
+      4. unresolvable → source 必须为 none，commit 与 clone_url 必须为 null
+      5. source: mirror → clone_url 必须非空
+      6. model + '/' + name 必须等于 submodule path（由 sync_catalog 的字段比对保证）
+      7. catalog 有条目但 .gitmodules 无对应 → 仅当 source: none 时合法
+    返回问题描述列表（空列表 = 全部通过）。
+    """
+    problems = []
+    for entry in entries:
+        name = entry.get("name") or "<未命名条目>"
+        for key in REQUIRED_KEYS:
+            if key not in entry:
+                problems.append("! %s: 缺少必填字段 %s" % (name, key))
+
+        status = entry.get("pin_status")
+        source = entry.get("source")
+        commit = entry.get("commit")
+        clone_url = entry.get("clone_url")
+        notes = entry.get("notes")
+
+        if status not in PIN_STATUSES:
+            problems.append("! %s: pin_status 非法 %r" % (name, status))
+        if source not in SOURCES:
+            problems.append("! %s: source 非法 %r" % (name, source))
+
+        if status == "valid":
+            if not (isinstance(commit, str) and _SHA_RE.fullmatch(commit)):
+                problems.append("! %s: pin_status=valid 但 commit 不是 40 位 hex: %r" % (name, commit))
+            if not clone_url:
+                problems.append("! %s: pin_status=valid 但 clone_url 为空" % name)
+        elif status == "broken":
+            if commit is not None:
+                problems.append("! %s: pin_status=broken 但 commit 非空: %r" % (name, commit))
+            if not isinstance(notes, list) or len(notes) < 2:
+                problems.append("! %s: pin_status=broken 但 notes 未说明失效原因与受影响的笔记" % name)
+        elif status == "unresolvable":
+            if source != "none":
+                problems.append("! %s: pin_status=unresolvable 但 source 不是 none" % name)
+            if commit is not None:
+                problems.append("! %s: pin_status=unresolvable 但 commit 非空" % name)
+            if clone_url is not None:
+                problems.append("! %s: pin_status=unresolvable 但 clone_url 非空" % name)
+
+        if source == "mirror" and not clone_url:
+            problems.append("! %s: source=mirror 但 clone_url 为空" % name)
+    return problems
+
+
+def check_manifest(repo_root, entries=None):
+    """校验 fetch-manifest.txt 与 catalog 生成结果一致（设计文档 §5.5.2 规则 9）。
+
+    比对前把两边都归一化成 LF —— 仓内 blob 是 LF，Windows 工作区因
+    core.autocrlf=true 可能是 CRLF，直接比原始字节会误判。
+    返回问题描述列表（空列表 = 一致）。
+    """
+    if entries is None:
+        entries = compute_entries(repo_root)
+    manifest_path = os.path.join(repo_root, MANIFEST_RELPATH)
+    if not os.path.exists(manifest_path):
+        return ["! fetch-manifest.txt 不存在: %s" % manifest_path]
+    with open(manifest_path, "r", encoding="utf-8", newline="") as fh:
+        on_disk = fh.read()
+    expected = render_manifest(entries)
+    disk_lines = _norm_eol(on_disk).split("\n")
+    want_lines = _norm_eol(expected).split("\n")
+    if disk_lines == want_lines:
+        return []
+    for i, (got, want) in enumerate(zip(disk_lines, want_lines), 1):
+        if got != want:
+            return ["! fetch-manifest.txt 第 %d 行不一致：磁盘 %r / 期望 %r" % (i, got, want)]
+    return ["! fetch-manifest.txt 行数不一致：磁盘 %d 行 / 期望 %d 行" % (
+        len(disk_lines), len(want_lines))]
+
+
 def summarize(entries):
     counts = {"valid": 0, "broken": 0, "unresolvable": 0}
     for entry in entries:
@@ -306,36 +413,56 @@ def summarize(entries):
         len(entries), counts["valid"], counts["broken"], counts["unresolvable"])
 
 
+def summarize_sources(entries):
+    """source 分布：mirror 95 / none 2（校验用 mirror 数，不是总数 97）。"""
+    counts = {"mirror": 0, "none": 0}
+    for entry in entries:
+        source = entry.get("source")
+        if source in counts:
+            counts[source] += 1
+    return "%d mirror, %d none" % (counts["mirror"], counts["none"])
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="catalog.yml 四字段同步工具")
     parser.add_argument("--repo-root", default=os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    parser.add_argument("--check", action="store_true", help="校验 catalog 是否已补齐（退出码 0=一致）")
+    parser.add_argument("--check", action="store_true", help="校验 catalog 与 manifest 是否一致（退出码 0=一致）")
     parser.add_argument("--apply", action="store_true", help="把四字段写回 catalog.yml")
     parser.add_argument("--write-manifest", action="store_true", help="重建 fetch-manifest.txt")
     args = parser.parse_args(argv)
 
-    repo_root = os.path.abspath(args.repo_root)
-    entries = compute_entries(repo_root)
-
-    if args.write_manifest:
-        path = write_manifest(repo_root)
-        print("wrote %s" % path)
-
-    if args.check:
-        diff = sync_catalog(repo_root, apply=False)
-        if diff:
-            print("catalog 不一致，%d 处差异：" % len(diff))
-            for line in diff[:50]:
-                print("  " + line)
-            return 1
-        print(summarize(entries))
+    if not (args.check or args.apply or args.write_manifest):
+        parser.print_help()
         return 0
 
-    if args.apply:
-        diff = sync_catalog(repo_root, apply=True)
-        print("applied %d changes" % len(diff))
-        for line in diff[:50]:
-            print("  " + line)
+    repo_root = os.path.abspath(args.repo_root)
+    try:
+        entries = compute_entries(repo_root)
+
+        if args.write_manifest:
+            path = write_manifest(repo_root)
+            print("wrote %s" % path)
+
+        if args.check:
+            diff = sync_catalog(repo_root, apply=False)
+            problems = check_schema(entries) + check_manifest(repo_root, entries)
+            if diff or problems:
+                print("校验未通过，%d 处问题：" % (len(diff) + len(problems)))
+                for line in (diff + problems)[:50]:
+                    print("  " + line)
+                return 1
+            print(summarize(entries))
+            print(summarize_sources(entries))
+            return 0
+
+        if args.apply:
+            diff = sync_catalog(repo_root, apply=True)
+            print("applied %d changes" % len(diff))
+            for line in diff[:50]:
+                print("  " + line)
+    except CatalogError as exc:
+        print("ERROR: %s" % exc, file=sys.stderr)
+        return 1
 
     return 0
 

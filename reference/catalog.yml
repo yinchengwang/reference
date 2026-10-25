@@ -25,6 +25,8 @@ projects:
     source: mirror
     notes:
       - 主流关系型数据库
+      - pin 23e360a7fac718d80b9e6a79f7d5a7bf37aa3bbc 在 GitHub 官方真实存在，但旧 gitee 镜像不含它；clone_url 已改用 GitHub 官方并实测按 SHA 可拉
+      - 笔记 docs/db-wiki/relational/mysql.md 的 21 处行号引用当前无法校验，需人工复核
   - name: sqlite3
     model: relational
     tier: core
@@ -311,6 +313,8 @@ projects:
     source: mirror
     notes:
       - Go 键值存储
+      - 现有 gitlink SHA 68315f176d9e328a233ace29b7579a829f89879f 在上游 cockroachdb/pebble 不存在（实测 not our ref + GitHub commit 页 HTTP 404）
+      - 笔记 docs/db-wiki/key-value/pebble.md 的 4 处行号引用当前已失效，需人工重新校对
   - name: dragonfly
     model: key-value
     tier: representative
@@ -324,6 +328,8 @@ projects:
     source: mirror
     notes:
       - Redis 兼容内存数据库
+      - 现有 gitlink SHA dafb825b0e5c6f0d8ce2836e1252a568fee639ff 在上游 dragonflydb/dragonfly 不存在（实测 not our ref + GitHub commit 页 HTTP 404）
+      - 笔记 docs/db-wiki/key-value/dragonfly.md 的 2 处行号引用当前已失效，需人工重新校对
   - name: mongodb
     model: document
     tier: core
@@ -455,6 +461,8 @@ projects:
     source: mirror
     notes:
       - 实时分析数据库
+      - 现有 gitlink SHA fa8dc9912637a2f729eef9f55356621fec18d40e 在上游 apache/druid 不存在（实测 not our ref + GitHub commit 页 HTTP 404）
+      - 笔记 docs/db-wiki/columnar/druid.md 当前无行号引用，但 pin 同样失效，引用该库前需重新校对
   - name: influxdb
     model: time-series
     tier: core
@@ -507,6 +515,8 @@ projects:
     source: mirror
     notes:
       - 时序数据库
+      - 现有 gitlink SHA 62385b1e2f1b36e99c4ff8201c7aa86716f64709 在上游 taosdata/TDengine 不存在（实测 not our ref + GitHub commit 页 HTTP 404）
+      - 笔记 docs/db-wiki/time-series/tdengine.md 的 75 处行号引用当前已失效，需人工重新校对
   - name: iotdb
     model: time-series
     tier: representative
