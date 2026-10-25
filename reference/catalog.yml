@@ -6,6 +6,10 @@ projects:
     mirror: https://github.com/postgres/postgres.git
     license: PostgreSQL
     status: active
+    commit: ea9c9432c828c6ba9e38bdd0bccd3f63507594fc
+    clone_url: https://github.com/postgres/postgres.git
+    pin_status: valid
+    source: mirror
     notes:
       - 关系型数据库典型实现
   - name: mysql
@@ -15,6 +19,10 @@ projects:
     mirror: https://gitee.com/yinchengwang_admin/mysql-server.git
     license: GPL-2.0
     status: active
+    commit: 23e360a7fac718d80b9e6a79f7d5a7bf37aa3bbc
+    clone_url: https://github.com/mysql/mysql-server.git
+    pin_status: valid
+    source: mirror
     notes:
       - 主流关系型数据库
   - name: sqlite3
@@ -24,6 +32,10 @@ projects:
     mirror: https://github.com/sqlite/sqlite.git
     license: Public Domain
     status: active
+    commit: 75136699f71415dd5093d46f182a77fef11bec48
+    clone_url: https://github.com/sqlite/sqlite.git
+    pin_status: valid
+    source: mirror
     notes:
       - 嵌入式关系型数据库
   - name: openGauss
@@ -33,6 +45,10 @@ projects:
     mirror: https://gitee.com/opengauss/openGauss-server.git
     license: MulanPSL-2.0
     status: active
+    commit: 33f3e1485758e2d27287b608f89f5e2515451c30
+    clone_url: https://github.com/opengauss-mirror/openGauss-server.git
+    pin_status: valid
+    source: mirror
     notes:
       - 企业级关系型数据库
   - name: redis
@@ -42,6 +58,10 @@ projects:
     mirror: https://gitee.com/yinchengwang_admin/redis.git
     license: BSD-3-Clause
     status: active
+    commit: f306bc31a93033551d29190ac6247f71f824cf3d
+    clone_url: https://github.com/redis/redis.git
+    pin_status: valid
+    source: mirror
     notes:
       - 键值数据库代表
   - name: elasticsearch
@@ -51,6 +71,10 @@ projects:
     mirror: https://gitee.com/yinchengwang_admin/elasticsearch.git
     license: SSPL
     status: active
+    commit: 81a4d59797c1b0e605e3c87ae31eec07ec9f434e
+    clone_url: https://github.com/elastic/elasticsearch.git
+    pin_status: valid
+    source: mirror
     notes:
       - 搜索与文档检索引擎
   - name: chroma
@@ -60,6 +84,10 @@ projects:
     mirror: https://github.com/chroma-core/chroma.git
     license: Apache-2.0
     status: active
+    commit: dfe209a58c3100e74cbdde8acfb7bc1aafe9664c
+    clone_url: https://github.com/chroma-core/chroma.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量数据库
   - name: milvus
@@ -69,6 +97,10 @@ projects:
     mirror: https://github.com/milvus-io/milvus.git
     license: Apache-2.0
     status: active
+    commit: b16c4623a9b900d9b90895bd7ea13c526d858015
+    clone_url: https://github.com/milvus-io/milvus.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量数据库
   - name: faiss
@@ -78,6 +110,10 @@ projects:
     mirror: https://gitee.com/yinchengwang_admin/faiss.git
     license: MIT
     status: active
+    commit: 02ea14372c9983f3eaa15698512180dc62ea234d
+    clone_url: https://github.com/facebookresearch/faiss.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量检索库
   - name: neo4j
@@ -87,6 +123,10 @@ projects:
     mirror: https://github.com/neo4j/neo4j.git
     license: GPL-3.0
     status: active
+    commit: f213380f812b820a1b312e2ea52cb3d8f1931ccc
+    clone_url: https://github.com/neo4j/neo4j.git
+    pin_status: valid
+    source: mirror
     notes:
       - 图数据库
   - name: pgvector
@@ -96,6 +136,10 @@ projects:
     mirror: https://gitee.com/yinchengwang_admin/pgvector.git
     license: PostgreSQL
     status: active
+    commit: e48241b4dcc045b18902914f668d03d1d399dfbe
+    clone_url: https://github.com/pgvector/pgvector.git
+    pin_status: valid
+    source: mirror
     notes:
       - PostgreSQL 向量扩展
   - name: ann-benchmarks
@@ -105,6 +149,10 @@ projects:
     mirror: https://gitee.com/yinchengwang_admin/ann-benchmarks.git
     license: MIT
     status: maintained
+    commit: 2e081ad32c1eccab72dcb739ad886c310b90f715
+    clone_url: https://github.com/erikbern/ann-benchmarks.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量检索基准
   - name: mariadb
@@ -114,6 +162,10 @@ projects:
     mirror: https://github.com/MariaDB/server.git
     license: GPL-2.0
     status: active
+    commit: bab03b0fc44e7aeac869b20b0055c6a8f2083eb6
+    clone_url: https://github.com/MariaDB/server.git
+    pin_status: valid
+    source: mirror
     notes:
       - MySQL 兼容分支
   - name: firebird
@@ -123,6 +175,10 @@ projects:
     mirror: https://github.com/FirebirdSQL/firebird.git
     license: IPL
     status: active
+    commit: f2ba590d2c2a8d7bc4449d36094adc5f019356c6
+    clone_url: https://github.com/FirebirdSQL/firebird.git
+    pin_status: valid
+    source: mirror
     notes:
       - 经典关系型数据库
   - name: h2
@@ -132,6 +188,10 @@ projects:
     mirror: https://github.com/h2database/h2database.git
     license: MPL-2.0
     status: active
+    commit: a5e059b660ca71bc7ff19b6eed00815b19f8ab04
+    clone_url: https://github.com/h2database/h2database.git
+    pin_status: valid
+    source: mirror
     notes:
       - 嵌入式关系型数据库
   - name: cockroachdb
@@ -141,6 +201,10 @@ projects:
     mirror: https://github.com/cockroachdb/cockroach.git
     license: BSL-1.1
     status: active
+    commit: 8812064a015d2faf99d3fc7e15880f94042954b0
+    clone_url: https://github.com/cockroachdb/cockroach.git
+    pin_status: valid
+    source: mirror
     notes:
       - 分布式 NewSQL
   - name: tidb
@@ -150,6 +214,10 @@ projects:
     mirror: https://github.com/pingcap/tidb.git
     license: Apache-2.0
     status: active
+    commit: 6a3e36ccecf0f1863d015528b8db3ea508760ab7
+    clone_url: https://github.com/pingcap/tidb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 分布式 HTAP
   - name: yugabytedb
@@ -159,6 +227,10 @@ projects:
     mirror: https://github.com/yugabyte/yugabyte-db.git
     license: Apache-2.0
     status: active
+    commit: 49ee38185838a754728efb0ec937b5135dbc7d04
+    clone_url: https://github.com/yugabyte/yugabyte-db.git
+    pin_status: valid
+    source: mirror
     notes:
       - 分布式 SQL
   - name: oceanbase
@@ -168,6 +240,10 @@ projects:
     mirror: https://github.com/oceanbase/oceanbase.git
     license: MulanPSL-2.0
     status: active
+    commit: null
+    clone_url: null
+    pin_status: unresolvable
+    source: none
     notes:
       - 分布式数据库
   - name: rocksdb
@@ -177,6 +253,10 @@ projects:
     mirror: https://github.com/facebook/rocksdb.git
     license: Apache-2.0
     status: active
+    commit: 8f492b2f47f2fa45efe7f05ae4e6e233997e5e49
+    clone_url: https://github.com/facebook/rocksdb.git
+    pin_status: valid
+    source: mirror
     notes:
       - LSM 引擎
   - name: leveldb
@@ -186,6 +266,10 @@ projects:
     mirror: https://github.com/google/leveldb.git
     license: BSD-3-Clause
     status: maintained
+    commit: 7ee830d02b623e8ffe0b95d59a74db1e58da04c5
+    clone_url: https://github.com/google/leveldb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 键值存储
   - name: foundationdb
@@ -195,6 +279,10 @@ projects:
     mirror: https://github.com/apple/foundationdb.git
     license: Apache-2.0
     status: active
+    commit: b7bb49457086606ab382b0b6f7355d78a2faf05f
+    clone_url: https://github.com/apple/foundationdb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 分布式事务键值存储
   - name: badger
@@ -204,6 +292,10 @@ projects:
     mirror: https://github.com/dgraph-io/badger.git
     license: Apache-2.0
     status: maintained
+    commit: 679bf5b72c9e1788fe7454a28fb4e140221b6668
+    clone_url: https://github.com/dgraph-io/badger.git
+    pin_status: valid
+    source: mirror
     notes:
       - Go 键值存储
   - name: pebble
@@ -213,6 +305,10 @@ projects:
     mirror: https://github.com/cockroachdb/pebble.git
     license: BSD-3-Clause
     status: active
+    commit: null
+    clone_url: https://github.com/cockroachdb/pebble.git
+    pin_status: broken
+    source: mirror
     notes:
       - Go 键值存储
   - name: dragonfly
@@ -222,6 +318,10 @@ projects:
     mirror: https://github.com/dragonflydb/dragonfly.git
     license: BSL-1.1
     status: active
+    commit: null
+    clone_url: https://github.com/dragonflydb/dragonfly.git
+    pin_status: broken
+    source: mirror
     notes:
       - Redis 兼容内存数据库
   - name: mongodb
@@ -231,6 +331,10 @@ projects:
     mirror: https://github.com/mongodb/mongo.git
     license: SSPL
     status: active
+    commit: d88752897110eef1aa5530f6238a53d682469903
+    clone_url: https://github.com/mongodb/mongo.git
+    pin_status: valid
+    source: mirror
     notes:
       - 文档数据库
   - name: couchdb
@@ -240,6 +344,10 @@ projects:
     mirror: https://github.com/apache/couchdb.git
     license: Apache-2.0
     status: active
+    commit: 0783f6799f09fd06690e0b46e122692cc642615b
+    clone_url: https://github.com/apache/couchdb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 文档数据库
   - name: couchbase
@@ -249,6 +357,10 @@ projects:
     mirror: https://github.com/couchbase/couchbase-lite-core.git
     license: BSL-1.1
     status: active
+    commit: e048a0590b2eb1496ed62ee7815258452cb674aa
+    clone_url: https://github.com/couchbase/couchbase-lite-core.git
+    pin_status: valid
+    source: mirror
     notes:
       - 注：官方 server 仓库已闭源（BSL 许可），此处使用 Couchbase Lite Core（C++ 嵌入式引擎，公开可读）
       - 文档与键值混合数据库
@@ -259,6 +371,10 @@ projects:
     mirror: https://github.com/ravendb/ravendb.git
     license: AGPL-3.0
     status: active
+    commit: c0bbece37e7b3d3afff2010b6b0e108633fd136e
+    clone_url: https://github.com/ravendb/ravendb.git
+    pin_status: valid
+    source: mirror
     notes:
       - .NET 文档数据库
   - name: ferretdb
@@ -268,6 +384,10 @@ projects:
     mirror: https://github.com/FerretDB/FerretDB.git
     license: Apache-2.0
     status: active
+    commit: 799235dab9e350655e72e65a0b24d849f7d68143
+    clone_url: https://github.com/FerretDB/FerretDB.git
+    pin_status: valid
+    source: mirror
     notes:
       - PostgreSQL 兼容文档数据库
   - name: clickhouse
@@ -277,6 +397,10 @@ projects:
     mirror: https://github.com/ClickHouse/ClickHouse.git
     license: Apache-2.0
     status: active
+    commit: 916d13776fe8418509cc074b74826df859059a17
+    clone_url: https://github.com/ClickHouse/ClickHouse.git
+    pin_status: valid
+    source: mirror
     notes:
       - 列式 OLAP
   - name: doris
@@ -286,6 +410,10 @@ projects:
     mirror: https://github.com/apache/doris.git
     license: Apache-2.0
     status: active
+    commit: 678df4e859a1a10a6a8f2fbfb726e5b676214b87
+    clone_url: https://github.com/apache/doris.git
+    pin_status: valid
+    source: mirror
     notes:
       - 列式分析数据库
   - name: starrocks
@@ -295,6 +423,10 @@ projects:
     mirror: https://github.com/StarRocks/starrocks.git
     license: Apache-2.0
     status: active
+    commit: d9d51efa874d5b4f7365e2af42b229de8ea4d6a1
+    clone_url: https://github.com/StarRocks/starrocks.git
+    pin_status: valid
+    source: mirror
     notes:
       - 列式分析数据库
   - name: pinot
@@ -304,6 +436,10 @@ projects:
     mirror: https://github.com/apache/pinot.git
     license: Apache-2.0
     status: active
+    commit: 5e914c979b355c0e8c9fd4cd6f401f5f899594b5
+    clone_url: https://github.com/apache/pinot.git
+    pin_status: valid
+    source: mirror
     notes:
       - 实时分析
   - name: druid
@@ -313,6 +449,10 @@ projects:
     mirror: https://github.com/apache/druid.git
     license: Apache-2.0
     status: active
+    commit: null
+    clone_url: https://github.com/apache/druid.git
+    pin_status: broken
+    source: mirror
     notes:
       - 实时分析数据库
   - name: influxdb
@@ -322,6 +462,10 @@ projects:
     mirror: https://github.com/influxdata/influxdb.git
     license: MIT
     status: active
+    commit: 693b1fd1b96cdcb980cf76a1004c0b3f1b46db48
+    clone_url: https://github.com/influxdata/influxdb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 时序数据库
   - name: victoriametrics
@@ -331,6 +475,10 @@ projects:
     mirror: https://github.com/VictoriaMetrics/VictoriaMetrics.git
     license: Apache-2.0
     status: active
+    commit: 278d7db2c96201ca8a90328a167e0ad565f79b29
+    clone_url: https://github.com/VictoriaMetrics/VictoriaMetrics.git
+    pin_status: valid
+    source: mirror
     notes:
       - 时序数据库
   - name: questdb
@@ -340,6 +488,10 @@ projects:
     mirror: https://github.com/questdb/questdb.git
     license: Apache-2.0
     status: active
+    commit: 2d9244fec3e5a17e3de1b7319d090a6b1cd94f4a
+    clone_url: https://github.com/questdb/questdb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 时序数据库
   - name: tdengine
@@ -349,6 +501,10 @@ projects:
     mirror: https://github.com/taosdata/TDengine.git
     license: AGPL-3.0
     status: active
+    commit: null
+    clone_url: https://github.com/taosdata/TDengine.git
+    pin_status: broken
+    source: mirror
     notes:
       - 时序数据库
   - name: iotdb
@@ -358,6 +514,10 @@ projects:
     mirror: https://github.com/apache/iotdb.git
     license: Apache-2.0
     status: active
+    commit: a10bc6ba7e744eb3981506613b2c439a0abacba3
+    clone_url: https://github.com/apache/iotdb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 时序数据库
   - name: opensearch
@@ -367,6 +527,10 @@ projects:
     mirror: https://github.com/opensearch-project/OpenSearch.git
     license: Apache-2.0
     status: active
+    commit: 608d710ae5344080b2fa8950b761d1ec7ddd3351
+    clone_url: https://github.com/opensearch-project/OpenSearch.git
+    pin_status: valid
+    source: mirror
     notes:
       - 搜索引擎
   - name: meilisearch
@@ -376,6 +540,10 @@ projects:
     mirror: https://github.com/meilisearch/meilisearch.git
     license: MIT
     status: active
+    commit: be181e115792eae868b1b7c0934a2a29b9d2fde7
+    clone_url: https://github.com/meilisearch/meilisearch.git
+    pin_status: valid
+    source: mirror
     notes:
       - 搜索引擎
   - name: typesense
@@ -385,6 +553,10 @@ projects:
     mirror: https://github.com/typesense/typesense.git
     license: GPL-3.0
     status: active
+    commit: ee7784f33195851f98bbc38b43696999543d7492
+    clone_url: https://github.com/typesense/typesense.git
+    pin_status: valid
+    source: mirror
     notes:
       - 搜索引擎
   - name: tantivy
@@ -394,6 +566,10 @@ projects:
     mirror: https://github.com/quickwit-oss/tantivy.git
     license: MIT
     status: active
+    commit: 266a6c48f2abded7a13dfbdc43801fdc7344114c
+    clone_url: https://github.com/quickwit-oss/tantivy.git
+    pin_status: valid
+    source: mirror
     notes:
       - Rust 全文检索库
   - name: quickwit
@@ -403,6 +579,10 @@ projects:
     mirror: https://github.com/quickwit-oss/quickwit.git
     license: Apache-2.0
     status: active
+    commit: dc77b01ae044e9a8dc0138fb040ec18ad017e751
+    clone_url: https://github.com/quickwit-oss/quickwit.git
+    pin_status: valid
+    source: mirror
     notes:
       - 搜索引擎
   - name: qdrant
@@ -412,6 +592,10 @@ projects:
     mirror: https://github.com/qdrant/qdrant.git
     license: Apache-2.0
     status: active
+    commit: 74f3e85b9473c62560006c043e13737ce6b48412
+    clone_url: https://github.com/qdrant/qdrant.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量数据库
   - name: weaviate
@@ -421,6 +605,10 @@ projects:
     mirror: https://github.com/weaviate/weaviate.git
     license: BSD-3-Clause
     status: active
+    commit: e6e3aa9e89786573fa2e97baf7347a2248ed50b7
+    clone_url: https://github.com/weaviate/weaviate.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量数据库
   - name: vespa
@@ -430,6 +618,10 @@ projects:
     mirror: https://github.com/vespa-engine/vespa.git
     license: Apache-2.0
     status: active
+    commit: 798599cf3b806447de1a6b7a15a1e71c62ccdcad
+    clone_url: https://github.com/vespa-engine/vespa.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量与搜索平台
   - name: lancedb
@@ -439,6 +631,10 @@ projects:
     mirror: https://github.com/lancedb/lancedb.git
     license: Apache-2.0
     status: active
+    commit: 0bc081608ae6c244fe0b72dc5100d59c695e3b2a
+    clone_url: https://github.com/lancedb/lancedb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量数据库
   - name: vald
@@ -448,6 +644,10 @@ projects:
     mirror: https://github.com/vdaas/vald.git
     license: Apache-2.0
     status: active
+    commit: 963e03436540e64c1d7a43203aef5e1d90d5f341
+    clone_url: https://github.com/vdaas/vald.git
+    pin_status: valid
+    source: mirror
     notes:
       - 分布式向量检索
   - name: usearch
@@ -457,6 +657,10 @@ projects:
     mirror: https://github.com/unum-cloud/usearch.git
     license: Apache-2.0
     status: active
+    commit: cc23bbaf21ef52313c5a495adbc40cbd733cdcfb
+    clone_url: https://github.com/unum-cloud/usearch.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量检索库
   - name: arangodb
@@ -466,6 +670,10 @@ projects:
     mirror: https://github.com/arangodb/arangodb.git
     license: Apache-2.0
     status: active
+    commit: ad92b7bcb3567e5b4f6cc3f97b622c02280b2b5c
+    clone_url: https://github.com/arangodb/arangodb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 多模型数据库
   - name: janusgraph
@@ -475,6 +683,10 @@ projects:
     mirror: https://github.com/JanusGraph/janusgraph.git
     license: Apache-2.0
     status: maintained
+    commit: cbd6fc2e58ad07849d36eea25a75de71d4c8cae2
+    clone_url: https://github.com/JanusGraph/janusgraph.git
+    pin_status: valid
+    source: mirror
     notes:
       - 图数据库
   - name: nebula
@@ -484,6 +696,10 @@ projects:
     mirror: https://github.com/vesoft-inc/nebula.git
     license: Apache-2.0
     status: active
+    commit: cdef57e5fd0a972ec9e51d5272638fd772273f46
+    clone_url: https://github.com/vesoft-inc/nebula.git
+    pin_status: valid
+    source: mirror
     notes:
       - 图数据库
   - name: memgraph
@@ -493,6 +709,10 @@ projects:
     mirror: https://github.com/memgraph/memgraph.git
     license: BSL-1.1
     status: active
+    commit: af42964f8eedaea6e611fc5bdae5715f88c3365d
+    clone_url: https://github.com/memgraph/memgraph.git
+    pin_status: valid
+    source: mirror
     notes:
       - 图数据库
   - name: kuzu
@@ -502,6 +722,10 @@ projects:
     mirror: https://github.com/kuzudb/kuzu.git
     license: MIT
     status: active
+    commit: 89f0263cc7a1fd9c396d2c4953747a013556a7f9
+    clone_url: https://github.com/kuzudb/kuzu.git
+    pin_status: valid
+    source: mirror
     notes:
       - 嵌入式图数据库
   - name: kafka
@@ -511,6 +735,10 @@ projects:
     mirror: https://github.com/apache/kafka.git
     license: Apache-2.0
     status: active
+    commit: db8a0925513a76d1a4f13df00867c7491a4b3ce7
+    clone_url: https://github.com/apache/kafka.git
+    pin_status: valid
+    source: mirror
     notes:
       - 事件流平台
   - name: redpanda
@@ -520,6 +748,10 @@ projects:
     mirror: https://github.com/redpanda-data/redpanda.git
     license: BSL-1.1
     status: active
+    commit: 3cfce474a872090e7c74d14181885f5838c54cf2
+    clone_url: https://github.com/redpanda-data/redpanda.git
+    pin_status: valid
+    source: mirror
     notes:
       - 流平台
   - name: pulsar
@@ -529,6 +761,10 @@ projects:
     mirror: https://github.com/apache/pulsar.git
     license: Apache-2.0
     status: active
+    commit: 00a6badafc62c25254f1fa93a04da513c3fc9b66
+    clone_url: https://github.com/apache/pulsar.git
+    pin_status: valid
+    source: mirror
     notes:
       - 消息流平台
   - name: nats
@@ -538,6 +774,10 @@ projects:
     mirror: https://github.com/nats-io/nats-server.git
     license: Apache-2.0
     status: active
+    commit: 34d3f9b4d1993cf4060da38e39d0dab8148f8059
+    clone_url: https://github.com/nats-io/nats-server.git
+    pin_status: valid
+    source: mirror
     notes:
       - 消息系统
   - name: duckdb
@@ -547,6 +787,10 @@ projects:
     mirror: https://github.com/duckdb/duckdb.git
     license: MIT
     status: active
+    commit: 5b1ef771b29aa1bf7d1013028cd622352e5adeda
+    clone_url: https://github.com/duckdb/duckdb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 嵌入式分析数据库
   - name: lmdb
@@ -556,6 +800,10 @@ projects:
     mirror: https://github.com/LMDB/lmdb.git
     license: OpenLDAP
     status: maintained
+    commit: 700e10f91a65fae69520301926fb9819f16d292f
+    clone_url: https://github.com/LMDB/lmdb.git
+    pin_status: valid
+    source: mirror
     notes:
       - 嵌入式键值存储
   - name: boltdb
@@ -565,6 +813,10 @@ projects:
     mirror: https://github.com/boltdb/bolt.git
     license: MIT
     status: maintained
+    commit: fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5
+    clone_url: https://github.com/boltdb/bolt.git
+    pin_status: valid
+    source: mirror
     notes:
       - 嵌入式键值存储
   - name: pklite
@@ -574,6 +826,10 @@ projects:
     mirror: https://github.com/nicholasgasior/pklite.git
     license: MIT
     status: maintained
+    commit: null
+    clone_url: null
+    pin_status: unresolvable
+    source: none
     notes:
       - 轻量嵌入式数据库
   - name: arrow
@@ -583,6 +839,10 @@ projects:
     mirror: https://github.com/apache/arrow.git
     license: Apache-2.0
     status: active
+    commit: 2e448f91a97a42c452e798796f0811b64406d26f
+    clone_url: https://github.com/apache/arrow.git
+    pin_status: valid
+    source: mirror
     notes:
       - 列式内存格式
   - name: datafusion
@@ -592,6 +852,10 @@ projects:
     mirror: https://github.com/apache/datafusion.git
     license: Apache-2.0
     status: active
+    commit: 3cabfa9be60255b3e9b05584d00dc92b961b1fed
+    clone_url: https://github.com/apache/datafusion.git
+    pin_status: valid
+    source: mirror
     notes:
       - SQL 执行引擎
   - name: velox
@@ -601,6 +865,10 @@ projects:
     mirror: https://github.com/facebookincubator/velox.git
     license: Apache-2.0
     status: active
+    commit: 611009c7c74cd6c4240c2dacce4d5f11c67d3b00
+    clone_url: https://github.com/facebookincubator/velox.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量化执行引擎
   - name: lance
@@ -610,6 +878,10 @@ projects:
     mirror: https://github.com/lancedb/lance.git
     license: Apache-2.0
     status: active
+    commit: 7fc1231c277bf64141f87e1dbf11809e3f92c617
+    clone_url: https://github.com/lancedb/lance.git
+    pin_status: valid
+    source: mirror
     notes:
       - 列式向量数据格式
   - name: hnswlib
@@ -619,6 +891,10 @@ projects:
     mirror: https://github.com/nmslib/hnswlib.git
     license: Apache-2.0
     status: maintained
+    commit: d9b3608c83d83b46c96e25088cb1d729b29dcfe9
+    clone_url: https://github.com/nmslib/hnswlib.git
+    pin_status: valid
+    source: mirror
     notes:
       - HNSW 索引库
   - name: tpch
@@ -628,6 +904,10 @@ projects:
     mirror: https://github.com/gregrahn/tpch-kit.git
     license: None
     status: maintained
+    commit: 852ad0a5ee31ebefeed884cea4188781dd9613a3
+    clone_url: https://github.com/gregrahn/tpch-kit.git
+    pin_status: valid
+    source: mirror
     notes:
       - 决策支持基准
   - name: tpcds
@@ -637,6 +917,10 @@ projects:
     mirror: https://github.com/gregrahn/tpcds-kit.git
     license: None
     status: maintained
+    commit: 5a3a81796992b725c2a8b216767e142609966752
+    clone_url: https://github.com/gregrahn/tpcds-kit.git
+    pin_status: valid
+    source: mirror
     notes:
       - 决策支持基准
   - name: db-bench
@@ -646,6 +930,10 @@ projects:
     mirror: https://github.com/wagjamin/db-bench.git
     license: MIT
     status: maintained
+    commit: 9ef20bd4698d84aed4fa6f0c6cf28997636d008b
+    clone_url: https://github.com/wagjamin/db-bench.git
+    pin_status: valid
+    source: mirror
     notes:
       - 通用数据库基准
   - name: vectordbbench
@@ -655,6 +943,10 @@ projects:
     mirror: https://github.com/zilliztech/VectorDBBench.git
     license: Apache-2.0
     status: active
+    commit: 1e53867e27f09606d5e38516012e08a86bfeabbb
+    clone_url: https://github.com/zilliztech/VectorDBBench.git
+    pin_status: valid
+    source: mirror
     notes:
       - 向量数据库基准
 
@@ -665,6 +957,10 @@ projects:
     mirror: https://github.com/langchain-ai/langchain.git
     license: MIT
     status: active
+    commit: 7185be59c9a08969a928ce0f5d2ae26432425a48
+    clone_url: https://github.com/langchain-ai/langchain.git
+    pin_status: valid
+    source: mirror
     notes:
       - LLM 应用编排框架主流实现
   - name: llama-index
@@ -674,6 +970,10 @@ projects:
     mirror: https://github.com/run-llama/llama_index.git
     license: MIT
     status: active
+    commit: 619d74664e8404612038bc15a1a40c686037277c
+    clone_url: https://github.com/run-llama/llama_index.git
+    pin_status: valid
+    source: mirror
     notes:
       - RAG 数据框架代表
   - name: haystack-ai
@@ -683,6 +983,10 @@ projects:
     mirror: https://github.com/deepset-ai/haystack.git
     license: Apache-2.0
     status: active
+    commit: aca9fc25d9d20816facdb9bd347d7eae7636d4b2
+    clone_url: https://github.com/deepset-ai/haystack.git
+    pin_status: valid
+    source: mirror
     notes:
       - NLP 管道框架
   - name: txtai
@@ -692,6 +996,10 @@ projects:
     mirror: https://github.com/neuml/txtai.git
     license: Apache-2.0
     status: active
+    commit: 72fb91d1ca05a98f1c7f0d6a4312906699959163
+    clone_url: https://github.com/neuml/txtai.git
+    pin_status: valid
+    source: mirror
     notes:
       - 语义搜索与 RAG 一体化
   - name: embedchain
@@ -701,6 +1009,10 @@ projects:
     mirror: https://github.com/embedchain/embedchain.git
     license: Apache-2.0
     status: active
+    commit: 0724291bd864cf807e88ee8981c8226644e8fb42
+    clone_url: https://github.com/embedchain/embedchain.git
+    pin_status: valid
+    source: mirror
     notes:
       - 快速构建 RAG 应用
   - name: verba
@@ -710,6 +1022,10 @@ projects:
     mirror: https://github.com/weaviate/verba.git
     license: MIT
     status: active
+    commit: 70b6cfb8ef59c9f178ffccfaf3aadcf737757a18
+    clone_url: https://github.com/weaviate/verba.git
+    pin_status: valid
+    source: mirror
     notes:
       - Weaviate 出品的 RAG 前端
   - name: cognita
@@ -719,6 +1035,10 @@ projects:
     mirror: https://github.com/truefoundry/cognita.git
     license: Apache-2.0
     status: active
+    commit: 8bcaae790af1effd398520338d6c623ff92b98fb
+    clone_url: https://github.com/truefoundry/cognita.git
+    pin_status: valid
+    source: mirror
     notes:
       - TrueFoundry 出品的模块化 RAG
   - name: r2r
@@ -728,6 +1048,10 @@ projects:
     mirror: https://github.com/SciPhi-AI/R2R.git
     license: MIT
     status: active
+    commit: 9c5a94d151f90876bd7eb860f300a8fd662dc481
+    clone_url: https://github.com/SciPhi-AI/R2R.git
+    pin_status: valid
+    source: mirror
     notes:
       - SciPhi 出品的 RAG 框架
   - name: quivr
@@ -737,6 +1061,10 @@ projects:
     mirror: https://github.com/QuivrHQ/quivr.git
     license: Apache-2.0
     status: active
+    commit: 1f72133e27e1cc0a7a05fb35a93df0f9e33136c4
+    clone_url: https://github.com/QuivrHQ/quivr.git
+    pin_status: valid
+    source: mirror
     notes:
       - 个人第二大脑知识库
   - name: private-gpt
@@ -746,6 +1074,10 @@ projects:
     mirror: https://github.com/zylon-ai/private-gpt.git
     license: Apache-2.0
     status: active
+    commit: 71060ce82a88883ef81cc1ac65952dfb0b27bc73
+    clone_url: https://github.com/zylon-ai/private-gpt.git
+    pin_status: valid
+    source: mirror
     notes:
       - 本地私有 GPT 问答
   - name: qanything
@@ -755,6 +1087,10 @@ projects:
     mirror: https://github.com/netease-youdao/QAnything.git
     license: Apache-2.0
     status: maintained
+    commit: 0698b62913e7ba71e167dadc139cbc782dd4ff97
+    clone_url: https://github.com/netease-youdao/QAnything.git
+    pin_status: valid
+    source: mirror
     notes:
       - 网易有道出品的本地知识库 QA
   - name: langgraph
@@ -764,6 +1100,10 @@ projects:
     mirror: https://github.com/langchain-ai/langgraph.git
     license: MIT
     status: active
+    commit: 5eb60aef6f3837a1fb632a8abc6cf8e8da81785b
+    clone_url: https://github.com/langchain-ai/langgraph.git
+    pin_status: valid
+    source: mirror
     notes:
       - LangChain 出品的图编排 Agent
   - name: crewai
@@ -773,6 +1113,10 @@ projects:
     mirror: https://github.com/crewAIInc/crewAI.git
     license: MIT
     status: active
+    commit: 3da2d4e9932b5f2fa9aa73ea9245e0f8b5c154f8
+    clone_url: https://github.com/crewAIInc/crewAI.git
+    pin_status: valid
+    source: mirror
     notes:
       - 多 Agent 协作框架代表
   - name: autogen
@@ -782,6 +1126,10 @@ projects:
     mirror: https://github.com/microsoft/autogen.git
     license: MIT
     status: active
+    commit: 027ecf0a379bcc1d09956d46d12d44a3ad9cee14
+    clone_url: https://github.com/microsoft/autogen.git
+    pin_status: valid
+    source: mirror
     notes:
       - Microsoft 出品的多 Agent 框架
   - name: metagpt
@@ -791,6 +1139,10 @@ projects:
     mirror: https://github.com/geekan/MetaGPT.git
     license: MIT
     status: active
+    commit: 11cdf466d042aece04fc6cfd13b28e1a70341b1f
+    clone_url: https://github.com/geekan/MetaGPT.git
+    pin_status: valid
+    source: mirror
     notes:
       - 软件公司多 Agent 模拟
   - name: openai-agents
@@ -800,6 +1152,10 @@ projects:
     mirror: https://github.com/openai/openai-agents-python.git
     license: MIT
     status: active
+    commit: 17d994bd3045dae71acda676a4ef4762ed8ecd94
+    clone_url: https://github.com/openai/openai-agents-python.git
+    pin_status: valid
+    source: mirror
     notes:
       - OpenAI 官方 Agent SDK
   - name: swarm
@@ -809,6 +1165,10 @@ projects:
     mirror: https://github.com/openai/swarm.git
     license: MIT
     status: maintained
+    commit: 6af0b4caf37dca4526dfd98e9fbd8ce36e7eeb22
+    clone_url: https://github.com/openai/swarm.git
+    pin_status: valid
+    source: mirror
     notes:
       - OpenAI 多 Agent 教学示例
   - name: agents
@@ -818,6 +1178,10 @@ projects:
     mirror: https://github.com/microsoft/agents.git
     license: MIT
     status: active
+    commit: cc2a383c65d45e1e34445114184eeab16b0e8559
+    clone_url: https://github.com/microsoft/agents.git
+    pin_status: valid
+    source: mirror
     notes:
       - Microsoft 新一代 Agent 框架
   - name: chatdev
@@ -827,6 +1191,10 @@ projects:
     mirror: https://github.com/OpenBMB/ChatDev.git
     license: Apache-2.0
     status: maintained
+    commit: 4fb2db0ea90375ce1059f44fe03ffbd191a7a169
+    clone_url: https://github.com/OpenBMB/ChatDev.git
+    pin_status: valid
+    source: mirror
     notes:
       - 教学型多 Agent 软件开发框架
   - name: agentverse
@@ -836,6 +1204,10 @@ projects:
     mirror: https://github.com/OpenBMB/AgentVerse.git
     license: Apache-2.0
     status: active
+    commit: f90c4bd9680fdd3bcff8c52c9170911a59b23478
+    clone_url: https://github.com/OpenBMB/AgentVerse.git
+    pin_status: valid
+    source: mirror
     notes:
       - 面向研究的多 Agent 平台
   - name: agixt
@@ -845,6 +1217,10 @@ projects:
     mirror: https://github.com/Josh-XT/AGiXT.git
     license: MIT
     status: active
+    commit: 3a3202419a962aa815d139849d6f218d3f81c998
+    clone_url: https://github.com/Josh-XT/AGiXT.git
+    pin_status: valid
+    source: mirror
     notes:
       - 插件化自动化 Agent 框架（原 AGiXT/AGiXT 已迁移）
   - name: open-interpreter
@@ -854,6 +1230,10 @@ projects:
     mirror: https://github.com/OpenInterpreter/open-interpreter.git
     license: AGPL-3.0
     status: active
+    commit: ac1fcc8fe57aba51fcc3c79afd57a0883237fe87
+    clone_url: https://github.com/OpenInterpreter/open-interpreter.git
+    pin_status: valid
+    source: mirror
     notes:
       - 代码解释器型 Agent
   - name: agentscope
@@ -863,6 +1243,10 @@ projects:
     mirror: https://github.com/modelscope/agentscope.git
     license: Apache-2.0
     status: active
+    commit: 976e2ffc9c28869282bbcdde9a2661c48147ff3b
+    clone_url: https://github.com/modelscope/agentscope.git
+    pin_status: valid
+    source: mirror
     notes:
       - 阿里 ModelScope 出品的多 Agent 框架
   - name: letta
@@ -872,5 +1256,9 @@ projects:
     mirror: https://github.com/letta-ai/letta.git
     license: Apache-2.0
     status: active
+    commit: 5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a
+    clone_url: https://github.com/letta-ai/letta.git
+    pin_status: valid
+    source: mirror
     notes:
       - 带长期记忆的状态化 Agent（原 MemGPT）

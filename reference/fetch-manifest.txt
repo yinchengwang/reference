@@ -1,74 +1,98 @@
-# model name mirror
-relational postgres https://github.com/postgres/postgres.git
-relational mysql https://gitee.com/yinchengwang_admin/mysql-server.git
-relational sqlite3 https://github.com/sqlite/sqlite.git
-relational openGauss https://gitee.com/opengauss/openGauss-server.git
-key-value redis https://gitee.com/yinchengwang_admin/redis.git
-search elasticsearch https://gitee.com/yinchengwang_admin/elasticsearch.git
-vector chroma https://github.com/chroma-core/chroma.git
-vector milvus https://github.com/milvus-io/milvus.git
-vector faiss https://gitee.com/yinchengwang_admin/faiss.git
-graph neo4j https://github.com/neo4j/neo4j.git
-extension pgvector https://gitee.com/yinchengwang_admin/pgvector.git
-benchmark ann-benchmarks https://gitee.com/yinchengwang_admin/ann-benchmarks.git
-relational mariadb https://github.com/MariaDB/server.git
-relational firebird https://github.com/FirebirdSQL/firebird.git
-relational h2 https://github.com/h2database/h2database.git
-distributed-sql cockroachdb https://github.com/cockroachdb/cockroach.git
-distributed-sql tidb https://github.com/pingcap/tidb.git
-distributed-sql yugabytedb https://github.com/yugabyte/yugabyte-db.git
-distributed-sql oceanbase https://github.com/oceanbase/oceanbase.git
-key-value rocksdb https://github.com/facebook/rocksdb.git
-key-value leveldb https://github.com/google/leveldb.git
-key-value foundationdb https://github.com/apple/foundationdb.git
-key-value badger https://github.com/dgraph-io/badger.git
-key-value pebble https://github.com/cockroachdb/pebble.git
-key-value dragonfly https://github.com/dragonflydb/dragonfly.git
-document mongodb https://github.com/mongodb/mongo.git
-document couchdb https://github.com/apache/couchdb.git
-document couchbase https://github.com/couchbase/server.git
-document ravendb https://github.com/ravendb/ravendb.git
-document ferretdb https://github.com/FerretDB/FerretDB.git
-columnar clickhouse https://github.com/ClickHouse/ClickHouse.git
-columnar doris https://github.com/apache/doris.git
-columnar starrocks https://github.com/StarRocks/starrocks.git
-columnar pinot https://github.com/apache/pinot.git
-columnar druid https://github.com/apache/druid.git
-time-series influxdb https://github.com/influxdata/influxdb.git
-time-series victoriametrics https://github.com/VictoriaMetrics/VictoriaMetrics.git
-time-series questdb https://github.com/questdb/questdb.git
-time-series tdengine https://github.com/taosdata/TDengine.git
-time-series iotdb https://github.com/apache/iotdb.git
-search opensearch https://github.com/opensearch-project/OpenSearch.git
-search meilisearch https://github.com/meilisearch/meilisearch.git
-search typesense https://github.com/typesense/typesense.git
-search tantivy https://github.com/quickwit-oss/tantivy.git
-search quickwit https://github.com/quickwit-oss/quickwit.git
-vector qdrant https://github.com/qdrant/qdrant.git
-vector weaviate https://github.com/weaviate/weaviate.git
-vector vespa https://github.com/vespa-engine/vespa.git
-vector lancedb https://github.com/lancedb/lancedb.git
-vector vald https://github.com/vdaas/vald.git
-vector usearch https://github.com/unum-cloud/usearch.git
-graph arangodb https://github.com/arangodb/arangodb.git
-graph janusgraph https://github.com/JanusGraph/janusgraph.git
-graph nebula https://github.com/vesoft-inc/nebula.git
-graph memgraph https://github.com/memgraph/memgraph.git
-graph kuzu https://github.com/kuzudb/kuzu.git
-stream kafka https://github.com/apache/kafka.git
-stream redpanda https://github.com/redpanda-data/redpanda.git
-stream pulsar https://github.com/apache/pulsar.git
-stream nats https://github.com/nats-io/nats-server.git
-embedded duckdb https://github.com/duckdb/duckdb.git
-embedded lmdb https://github.com/LMDB/lmdb.git
-embedded boltdb https://github.com/boltdb/bolt.git
-embedded pklite https://github.com/nicholasgasior/pklite.git
-extension arrow https://github.com/apache/arrow.git
-extension datafusion https://github.com/apache/datafusion.git
-extension velox https://github.com/facebookincubator/velox.git
-extension lance https://github.com/lancedb/lance.git
-extension hnswlib https://github.com/nmslib/hnswlib.git
-benchmark tpch https://github.com/gregrahn/tpch-kit.git
-benchmark tpcds https://github.com/gregrahn/tpcds-kit.git
-benchmark db-bench https://github.com/nicholasgasior/db-bench.git
-benchmark vectordbbench https://github.com/zilliztech/VectorDBBench.git
+# model	name	clone_url	commit	pin_status
+relational	postgres	https://github.com/postgres/postgres.git	ea9c9432c828c6ba9e38bdd0bccd3f63507594fc	valid
+relational	mysql	https://github.com/mysql/mysql-server.git	23e360a7fac718d80b9e6a79f7d5a7bf37aa3bbc	valid
+relational	sqlite3	https://github.com/sqlite/sqlite.git	75136699f71415dd5093d46f182a77fef11bec48	valid
+relational	openGauss	https://github.com/opengauss-mirror/openGauss-server.git	33f3e1485758e2d27287b608f89f5e2515451c30	valid
+key-value	redis	https://github.com/redis/redis.git	f306bc31a93033551d29190ac6247f71f824cf3d	valid
+search	elasticsearch	https://github.com/elastic/elasticsearch.git	81a4d59797c1b0e605e3c87ae31eec07ec9f434e	valid
+vector	chroma	https://github.com/chroma-core/chroma.git	dfe209a58c3100e74cbdde8acfb7bc1aafe9664c	valid
+vector	milvus	https://github.com/milvus-io/milvus.git	b16c4623a9b900d9b90895bd7ea13c526d858015	valid
+vector	faiss	https://github.com/facebookresearch/faiss.git	02ea14372c9983f3eaa15698512180dc62ea234d	valid
+graph	neo4j	https://github.com/neo4j/neo4j.git	f213380f812b820a1b312e2ea52cb3d8f1931ccc	valid
+extension	pgvector	https://github.com/pgvector/pgvector.git	e48241b4dcc045b18902914f668d03d1d399dfbe	valid
+benchmark	ann-benchmarks	https://github.com/erikbern/ann-benchmarks.git	2e081ad32c1eccab72dcb739ad886c310b90f715	valid
+relational	mariadb	https://github.com/MariaDB/server.git	bab03b0fc44e7aeac869b20b0055c6a8f2083eb6	valid
+relational	firebird	https://github.com/FirebirdSQL/firebird.git	f2ba590d2c2a8d7bc4449d36094adc5f019356c6	valid
+relational	h2	https://github.com/h2database/h2database.git	a5e059b660ca71bc7ff19b6eed00815b19f8ab04	valid
+distributed-sql	cockroachdb	https://github.com/cockroachdb/cockroach.git	8812064a015d2faf99d3fc7e15880f94042954b0	valid
+distributed-sql	tidb	https://github.com/pingcap/tidb.git	6a3e36ccecf0f1863d015528b8db3ea508760ab7	valid
+distributed-sql	yugabytedb	https://github.com/yugabyte/yugabyte-db.git	49ee38185838a754728efb0ec937b5135dbc7d04	valid
+distributed-sql	oceanbase	-	-	unresolvable
+key-value	rocksdb	https://github.com/facebook/rocksdb.git	8f492b2f47f2fa45efe7f05ae4e6e233997e5e49	valid
+key-value	leveldb	https://github.com/google/leveldb.git	7ee830d02b623e8ffe0b95d59a74db1e58da04c5	valid
+key-value	foundationdb	https://github.com/apple/foundationdb.git	b7bb49457086606ab382b0b6f7355d78a2faf05f	valid
+key-value	badger	https://github.com/dgraph-io/badger.git	679bf5b72c9e1788fe7454a28fb4e140221b6668	valid
+key-value	pebble	https://github.com/cockroachdb/pebble.git	-	broken
+key-value	dragonfly	https://github.com/dragonflydb/dragonfly.git	-	broken
+document	mongodb	https://github.com/mongodb/mongo.git	d88752897110eef1aa5530f6238a53d682469903	valid
+document	couchdb	https://github.com/apache/couchdb.git	0783f6799f09fd06690e0b46e122692cc642615b	valid
+document	couchbase	https://github.com/couchbase/couchbase-lite-core.git	e048a0590b2eb1496ed62ee7815258452cb674aa	valid
+document	ravendb	https://github.com/ravendb/ravendb.git	c0bbece37e7b3d3afff2010b6b0e108633fd136e	valid
+document	ferretdb	https://github.com/FerretDB/FerretDB.git	799235dab9e350655e72e65a0b24d849f7d68143	valid
+columnar	clickhouse	https://github.com/ClickHouse/ClickHouse.git	916d13776fe8418509cc074b74826df859059a17	valid
+columnar	doris	https://github.com/apache/doris.git	678df4e859a1a10a6a8f2fbfb726e5b676214b87	valid
+columnar	starrocks	https://github.com/StarRocks/starrocks.git	d9d51efa874d5b4f7365e2af42b229de8ea4d6a1	valid
+columnar	pinot	https://github.com/apache/pinot.git	5e914c979b355c0e8c9fd4cd6f401f5f899594b5	valid
+columnar	druid	https://github.com/apache/druid.git	-	broken
+time-series	influxdb	https://github.com/influxdata/influxdb.git	693b1fd1b96cdcb980cf76a1004c0b3f1b46db48	valid
+time-series	victoriametrics	https://github.com/VictoriaMetrics/VictoriaMetrics.git	278d7db2c96201ca8a90328a167e0ad565f79b29	valid
+time-series	questdb	https://github.com/questdb/questdb.git	2d9244fec3e5a17e3de1b7319d090a6b1cd94f4a	valid
+time-series	tdengine	https://github.com/taosdata/TDengine.git	-	broken
+time-series	iotdb	https://github.com/apache/iotdb.git	a10bc6ba7e744eb3981506613b2c439a0abacba3	valid
+search	opensearch	https://github.com/opensearch-project/OpenSearch.git	608d710ae5344080b2fa8950b761d1ec7ddd3351	valid
+search	meilisearch	https://github.com/meilisearch/meilisearch.git	be181e115792eae868b1b7c0934a2a29b9d2fde7	valid
+search	typesense	https://github.com/typesense/typesense.git	ee7784f33195851f98bbc38b43696999543d7492	valid
+search	tantivy	https://github.com/quickwit-oss/tantivy.git	266a6c48f2abded7a13dfbdc43801fdc7344114c	valid
+search	quickwit	https://github.com/quickwit-oss/quickwit.git	dc77b01ae044e9a8dc0138fb040ec18ad017e751	valid
+vector	qdrant	https://github.com/qdrant/qdrant.git	74f3e85b9473c62560006c043e13737ce6b48412	valid
+vector	weaviate	https://github.com/weaviate/weaviate.git	e6e3aa9e89786573fa2e97baf7347a2248ed50b7	valid
+vector	vespa	https://github.com/vespa-engine/vespa.git	798599cf3b806447de1a6b7a15a1e71c62ccdcad	valid
+vector	lancedb	https://github.com/lancedb/lancedb.git	0bc081608ae6c244fe0b72dc5100d59c695e3b2a	valid
+vector	vald	https://github.com/vdaas/vald.git	963e03436540e64c1d7a43203aef5e1d90d5f341	valid
+vector	usearch	https://github.com/unum-cloud/usearch.git	cc23bbaf21ef52313c5a495adbc40cbd733cdcfb	valid
+graph	arangodb	https://github.com/arangodb/arangodb.git	ad92b7bcb3567e5b4f6cc3f97b622c02280b2b5c	valid
+graph	janusgraph	https://github.com/JanusGraph/janusgraph.git	cbd6fc2e58ad07849d36eea25a75de71d4c8cae2	valid
+graph	nebula	https://github.com/vesoft-inc/nebula.git	cdef57e5fd0a972ec9e51d5272638fd772273f46	valid
+graph	memgraph	https://github.com/memgraph/memgraph.git	af42964f8eedaea6e611fc5bdae5715f88c3365d	valid
+graph	kuzu	https://github.com/kuzudb/kuzu.git	89f0263cc7a1fd9c396d2c4953747a013556a7f9	valid
+stream	kafka	https://github.com/apache/kafka.git	db8a0925513a76d1a4f13df00867c7491a4b3ce7	valid
+stream	redpanda	https://github.com/redpanda-data/redpanda.git	3cfce474a872090e7c74d14181885f5838c54cf2	valid
+stream	pulsar	https://github.com/apache/pulsar.git	00a6badafc62c25254f1fa93a04da513c3fc9b66	valid
+stream	nats	https://github.com/nats-io/nats-server.git	34d3f9b4d1993cf4060da38e39d0dab8148f8059	valid
+embedded	duckdb	https://github.com/duckdb/duckdb.git	5b1ef771b29aa1bf7d1013028cd622352e5adeda	valid
+embedded	lmdb	https://github.com/LMDB/lmdb.git	700e10f91a65fae69520301926fb9819f16d292f	valid
+embedded	boltdb	https://github.com/boltdb/bolt.git	fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5	valid
+embedded	pklite	-	-	unresolvable
+extension	arrow	https://github.com/apache/arrow.git	2e448f91a97a42c452e798796f0811b64406d26f	valid
+extension	datafusion	https://github.com/apache/datafusion.git	3cabfa9be60255b3e9b05584d00dc92b961b1fed	valid
+extension	velox	https://github.com/facebookincubator/velox.git	611009c7c74cd6c4240c2dacce4d5f11c67d3b00	valid
+extension	lance	https://github.com/lancedb/lance.git	7fc1231c277bf64141f87e1dbf11809e3f92c617	valid
+extension	hnswlib	https://github.com/nmslib/hnswlib.git	d9b3608c83d83b46c96e25088cb1d729b29dcfe9	valid
+benchmark	tpch	https://github.com/gregrahn/tpch-kit.git	852ad0a5ee31ebefeed884cea4188781dd9613a3	valid
+benchmark	tpcds	https://github.com/gregrahn/tpcds-kit.git	5a3a81796992b725c2a8b216767e142609966752	valid
+benchmark	db-bench	https://github.com/wagjamin/db-bench.git	9ef20bd4698d84aed4fa6f0c6cf28997636d008b	valid
+benchmark	vectordbbench	https://github.com/zilliztech/VectorDBBench.git	1e53867e27f09606d5e38516012e08a86bfeabbb	valid
+ai/rag	langchain	https://github.com/langchain-ai/langchain.git	7185be59c9a08969a928ce0f5d2ae26432425a48	valid
+ai/rag	llama-index	https://github.com/run-llama/llama_index.git	619d74664e8404612038bc15a1a40c686037277c	valid
+ai/rag	haystack-ai	https://github.com/deepset-ai/haystack.git	aca9fc25d9d20816facdb9bd347d7eae7636d4b2	valid
+ai/rag	txtai	https://github.com/neuml/txtai.git	72fb91d1ca05a98f1c7f0d6a4312906699959163	valid
+ai/rag	embedchain	https://github.com/embedchain/embedchain.git	0724291bd864cf807e88ee8981c8226644e8fb42	valid
+ai/rag	verba	https://github.com/weaviate/verba.git	70b6cfb8ef59c9f178ffccfaf3aadcf737757a18	valid
+ai/rag	cognita	https://github.com/truefoundry/cognita.git	8bcaae790af1effd398520338d6c623ff92b98fb	valid
+ai/rag	r2r	https://github.com/SciPhi-AI/R2R.git	9c5a94d151f90876bd7eb860f300a8fd662dc481	valid
+ai/rag	quivr	https://github.com/QuivrHQ/quivr.git	1f72133e27e1cc0a7a05fb35a93df0f9e33136c4	valid
+ai/rag	private-gpt	https://github.com/zylon-ai/private-gpt.git	71060ce82a88883ef81cc1ac65952dfb0b27bc73	valid
+ai/rag	qanything	https://github.com/netease-youdao/QAnything.git	0698b62913e7ba71e167dadc139cbc782dd4ff97	valid
+ai/agent	langgraph	https://github.com/langchain-ai/langgraph.git	5eb60aef6f3837a1fb632a8abc6cf8e8da81785b	valid
+ai/agent	crewai	https://github.com/crewAIInc/crewAI.git	3da2d4e9932b5f2fa9aa73ea9245e0f8b5c154f8	valid
+ai/agent	autogen	https://github.com/microsoft/autogen.git	027ecf0a379bcc1d09956d46d12d44a3ad9cee14	valid
+ai/agent	metagpt	https://github.com/geekan/MetaGPT.git	11cdf466d042aece04fc6cfd13b28e1a70341b1f	valid
+ai/agent	openai-agents	https://github.com/openai/openai-agents-python.git	17d994bd3045dae71acda676a4ef4762ed8ecd94	valid
+ai/agent	swarm	https://github.com/openai/swarm.git	6af0b4caf37dca4526dfd98e9fbd8ce36e7eeb22	valid
+ai/agent	agents	https://github.com/microsoft/agents.git	cc2a383c65d45e1e34445114184eeab16b0e8559	valid
+ai/agent	chatdev	https://github.com/OpenBMB/ChatDev.git	4fb2db0ea90375ce1059f44fe03ffbd191a7a169	valid
+ai/agent	agentverse	https://github.com/OpenBMB/AgentVerse.git	f90c4bd9680fdd3bcff8c52c9170911a59b23478	valid
+ai/agent	agixt	https://github.com/Josh-XT/AGiXT.git	3a3202419a962aa815d139849d6f218d3f81c998	valid
+ai/agent	open-interpreter	https://github.com/OpenInterpreter/open-interpreter.git	ac1fcc8fe57aba51fcc3c79afd57a0883237fe87	valid
+ai/agent	agentscope	https://github.com/modelscope/agentscope.git	976e2ffc9c28869282bbcdde9a2661c48147ff3b	valid
+ai/agent	letta	https://github.com/letta-ai/letta.git	5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a	valid
