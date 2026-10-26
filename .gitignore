@@ -27,9 +27,10 @@ compile_commands.json
 *.gcov
 
 # submodule 工作树（gitlink 已跟踪实体，无需再跟踪其内容）
-# submodule 工作树不入父仓索引（gitlink 机制），gitignore 对 gitlink 路径不生效
-# 参见 design doc C5 / C17 —— 实测 `git check-ignore -v reference/vector/faiss` 无输出，
-# 原先的 `reference/*/` + `!reference/*/README.md` 两条规则是误导，已删除。
+# submodule 工作树是 gitlink —— 已跟踪的路径不受 .gitignore 约束；
+# 且 `!reference/*/README.md` 无法重新包含被 `reference/*/` 排除掉的父目录下的文件。
+# 两条规则实测无效（`git check-ignore -v reference/vector/faiss` 无输出），已删除。
+# 参见 design doc C5 / C17
 
 # 测试与运行时数据
 test-results/

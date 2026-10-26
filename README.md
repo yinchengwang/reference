@@ -9,7 +9,8 @@
 
 | 分类 | 说明 |
 |---|---|
-| `ai/` | Agent 框架与 RAG 工具链 |
+| `ai/agent/` | Agent 框架（多智能体编排、工具调用） |
+| `ai/rag/` | RAG 检索增强生成工具链 |
 | `benchmark/` | 基准测试套件（ANN、TPC-H/DS、vectordb） |
 | `columnar/` | 列式存储（ClickHouse、Doris、StarRocks…） |
 | `distributed-sql/` | 分布式 SQL（CockroachDB、TiDB、YugabyteDB…） |
@@ -24,12 +25,17 @@
 | `time-series/` | 时序数据库（InfluxDB、IoTDB、TDengine…） |
 | `vector/` | 向量数据库（Faiss、Milvus、Qdrant、Weaviate…） |
 
-目录清单见 `reference/catalog.yml`，拉取记录见 `reference/fetch-manifest.txt`。
+目录清单见 `reference/catalog.yml`（97 条，含 `commit` / `clone_url` / `pin_status` / `source` 四个字段）；
+`reference/fetch-manifest.txt` 是由 catalog 生成的 5 列 **pin lockfile**
+（`model` / `name` / `clone_url` / `commit` / `pin_status`），**不是拉取日志** ——
+实际拉取记录见 `reference/AUDIT.md`。
 
 ## `docs/` —— 源码阅读笔记层
 
-`db-wiki/`（75 篇）、`rag-wiki/`（13 篇）、`agent-wiki/`（15 篇），
-是 `reference/` 源码的**阅读笔记**：每条结论都带精确的源码行号引用。
+`db-wiki/`（68 篇）、`rag-wiki/`（12 篇）、`agent-wiki/`（14 篇）
+（篇数不含各自的 `README.md`），是 `reference/` 源码的**阅读笔记**：
+多数结论带精确的源码行号引用；少数因 gitlink pin 失效或无源码镜像而**无法校验**，
+这类笔记顶部带 ⚠️ 警示（各 wiki 的「无对应源码镜像的笔记」一节有清单）。
 
 | 目录 | 内容 |
 |---|---|

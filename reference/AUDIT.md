@@ -115,11 +115,15 @@
 
 ### 拉取结果（本次验收）
 
-| 项 | 结果 |
-|---|---|
-| 成功 | 1（faiss —— 唯一已 init 的库，HEAD 已在 pin 上，幂等跳过） |
-| 跳过 | 96（4 条 `broken` + 2 条 `unresolvable`，另有 90 条未按需拉取） |
-| 失败 | 0 |
+| 项 | 数量 | 说明 |
+|---|---:|---|
+| 幂等跳过（HEAD 已在 pin） | 1 | `faiss` —— 95 个里唯一已 init 的库 |
+| 跳过：pin 失效 | 4 | `druid` / `pebble` / `tdengine` / `dragonfly` —— 按设计不拉，避免拉 HEAD 冒充 pin |
+| 跳过：无源码镜像 | 2 | `oceanbase` / `pklite` |
+| 未按需拉取 | 90 | 其余 `valid` 条目（按需拉取，默认不拉） |
+| 失败 | 0 | — |
+
+合计 1 + 4 + 2 + 90 = 97 条。
 
 ### 4 个失效 pin（只标注，不重选 commit）
 
@@ -132,8 +136,12 @@
 | `tdengine` | gitlink pin `62385b1e…` 在上游不存在 | `docs/db-wiki/time-series/tdengine.md`（75 处引用） |
 | `dragonfly` | gitlink pin `dafb825b…` 在上游不存在 | `docs/db-wiki/key-value/dragonfly.md`（2 处引用） |
 
-另有 `oceanbase`（`source: none`，无源码镜像，`docs/db-wiki/distributed-sql/oceanbase.md` 的 20 处引用无从校验）
-与 `mysql`（pin 本身有效，但旧 gitee 镜像不含它，已改用 GitHub 官方，21 处引用需复核）。
+**受影响的行号引用合计 102 处**（75 + 4 + 2 + 21）：tdengine 75、pebble 4、dragonfly 2、mysql 21。
+其中 mysql 的 pin 本身**有效**（旧 gitee 镜像不含它，已改用 GitHub 官方并实测可按 SHA 拉取），
+只是引用需复核；druid 无行号引用（0 处）。
+
+另有 `oceanbase`（`source: none`，无源码镜像）另有 **20 处**引用无从校验，
+不计入上面 102 处（其原因不是 pin 失效，而是没有源码可比）。
 
 ### 拉取方式
 
