@@ -9,8 +9,10 @@
 >   🔬 **已深化（行号级）** 43 篇 · 🔷 **已深化（canonical 标注）** 24 篇 · ◻️ **路径待核实** 1 篇
 >
 > 「项目状态总览」中的**深化**列按三档标注，读者可据此判断引用能否直接定位到源码：
-> - 🔬 **已深化（行号级）**——`reference/` 子模块已 init，每个源码引用带**精确行号**，
->   可用 `python scripts/check-wiki-refs.py <file> --submodules ... --repo-root .` 全量校验；
+> - 🔬 **已深化（行号级）**——每个源码引用带**精确行号**（不是符号名或 approx 标注），
+>   可用 `python scripts/check-wiki-refs.py <file> --submodules ... --repo-root .` 校验；
+>   **前提是先按需拉取对应 submodule** —— 本仓当前只有 `reference/vector/faiss` 已 init，
+>   未 init 时该命令会报 `FILE_NOT_FOUND`；
 > - 🔷 **已深化（canonical 标注）**——子模块**尚未 init**（或历史深化时未采用行号），
 >   源码路径为上游 canonical 布局，**路径本身未经验证**，引用处标注「行号需校对」；
 >   **或 gitlink pin 已失效 / 无源码镜像**，行号引用无从校验 —— 这类笔记顶部带 ⚠️ 警示；
@@ -55,7 +57,7 @@
 | 分类 | 项目 | 建档 | 深化 |
 |------|------|------|------|
 | relational | [postgres.md](./relational/postgres.md) | ✅ |  🔬  |
-| relational | [mysql.md](./relational/mysql.md) | ✅ |  🔷  |
+| relational | [mysql.md](./relational/mysql.md) | ✅ |  🔬  |
 | relational | [sqlite3.md](./relational/sqlite3.md) | ✅ |  🔬  |
 | relational | [openGauss.md](./relational/openGauss.md) | ✅ |  🔬  |
 | relational | [mariadb.md](./relational/mariadb.md) | ✅ |  🔬  |
@@ -173,7 +175,7 @@
 |------|------|------|------|
 | extension | [arrow.md](./extension/arrow.md) | ✅ |  🔷  |
 | extension | [pgvector.md](./extension/pgvector.md) | ✅ |  🔷  |
-| extension | [datafusion.md](./extension/datafusion.md) | ✅  | 🔬 |
+| extension | [datafusion.md](./extension/datafusion.md) | ✅  | 🔷 |
 | extension | [velox.md](./extension/velox.md) | ✅ |  ◻️  |
 | extension | [lance.md](./extension/lance.md) | ✅ |  🔷  |
 | extension | [hnswlib.md](./extension/hnswlib.md) | ✅ |  🔷  |
@@ -196,7 +198,8 @@
 | `distributed-sql/oceanbase.md` | 无源码镜像（catalog 标 `source: none`） |
 | `embedded/pklite.md` | 无源码镜像（catalog 标 `source: none`） |
 
-这解释了为什么笔记覆盖率不是 100% —— 其余分类的笔记与源码镜像严格一一对应。
+这解释了为什么笔记覆盖率不是 100% —— 其余**有笔记的**分类与源码镜像严格一一对应
+（`benchmark/` 分类下的 5 个库只在引用部分提及，不单独写 wiki）。
 
 ## 差距分析
 
