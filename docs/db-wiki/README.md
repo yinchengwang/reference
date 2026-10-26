@@ -186,11 +186,24 @@
 
 ---
 
+## 无对应源码镜像的笔记
+
+以下笔记记录的是产品认知而非源码精读，因此不含精确行号引用，也无法做行号校验：
+
+| 笔记 | 说明 |
+|---|---|
+| `distributed-sql/oceanbase.md` | 无源码镜像（catalog 标 `source: none`） |
+| `embedded/pklite.md` | 无源码镜像（catalog 标 `source: none`） |
+| `../rag-wiki/commercial-rag-products.md` | 商业产品调研，非源码精读 |
+| `../agent-wiki/commercial-agent-products.md` | 商业产品调研，非源码精读 |
+
+这解释了为什么笔记覆盖率不是 100% —— 其余分类的笔记与源码镜像严格一一对应。
+
 ## 差距分析
 
 基于本 wiki 库的「自研 vs 业界」分析已发布，详见：
 
-- 总报告：[docs/gap-analysis/README.md](../gap-analysis/README.md)
-- 子报告：[docs/gap-analysis/relational.md](../gap-analysis/relational.md)、[key-value.md](../gap-analysis/key-value.md)、[document.md](../gap-analysis/document.md)、[columnar.md](../gap-analysis/columnar.md)、[time-series.md](../gap-analysis/time-series.md)、[search.md](../gap-analysis/search.md)、[vector.md](../gap-analysis/vector.md)、[graph.md](../gap-analysis/graph.md)、[stream.md](../gap-analysis/stream.md)、[embedded.md](../gap-analysis/embedded.md)、[extension.md](../gap-analysis/extension.md)
+- 总报告：[docs/analysis/README.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/README.md)
+- 子报告：[docs/analysis/relational.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/relational.md)、[docs/analysis/key-value.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/key-value.md)、[docs/analysis/document.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/document.md)、[docs/analysis/columnar.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/columnar.md)、[docs/analysis/time-series.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/time-series.md)、[docs/analysis/search.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/search.md)、[docs/analysis/vector.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/vector.md)、[docs/analysis/graph.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/graph.md)、[docs/analysis/stream.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/stream.md)、[docs/analysis/embedded.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/embedded.md)、[docs/analysis/extension.md](https://github.com/yinchengwang/projects/blob/3c50a5e0f1dcae9a4496255ded59f77bc567146f/docs/analysis/extension.md)
 
 最后更新：2026-10-16

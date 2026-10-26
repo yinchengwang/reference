@@ -1,5 +1,8 @@
 # Apache Druid Wiki（亚秒 OLAP + Roll-up + 时序分析）
 
+> ⚠️ **本文的行号引用当前无法校验。**
+> 原因：gitlink pin `fa8dc991…` 在上游不存在。行号可能已随上游漂移，需人工重新校对后才能作为精确引用使用。
+
 > 参考版本：Apache Druid 当前 commit `9f8a7b6c5d4e3f2a1b9c8d7e6f5a4b3c2d1e9f8a`（v30.x 系列），Java 实现，亚秒 OLAP，Roll-up 预聚合，专为时序数据 + 高基数维度 + 实时摄入设计。
 
 ## 一、项目定位

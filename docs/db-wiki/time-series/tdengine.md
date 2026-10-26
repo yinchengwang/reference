@@ -1,5 +1,8 @@
 # TDengine Wiki（IoT 优化的端到端时序平台）
 
+> ⚠️ **本文的行号引用当前无法校验。**
+> 原因：gitlink pin `62385b1e…` 在上游不存在（实测 `not our ref`）。行号可能已随上游漂移，需人工重新校对后才能作为精确引用使用。
+
 > 参考版本：TDengine 当前 main 分支（commit `efbda38be81`，2026 era），C + Go 混合实现，TSDB 双层架构 + 多级存储 + 数据订阅，是 IoT 端到端时序平台代表。
 
 ## 一、项目定位

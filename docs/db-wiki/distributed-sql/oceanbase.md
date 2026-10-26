@@ -1,5 +1,8 @@
 # OceanBase Wiki（分布式 SQL / NewSQL / HTAP）
 
+> ⚠️ **本文的行号引用当前无法校验。**
+> 原因：无源码镜像（`source: none`），引用无从校验。行号可能已随上游漂移，需人工重新校对后才能作为精确引用使用。
+
 > 参考版本：OceanBase 仓库当前 master 分支（commit 与上游同步），主要 API 与数据布局在 v4.0（"OB Cloud Native"）之后稳定；本文档基于 master HEAD（约 v4.3.x 系列）。
 
 ## 一、项目定位

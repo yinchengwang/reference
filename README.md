@@ -4,7 +4,7 @@
 
 ## `reference/` —— 第三方源码镜像
 
-14 个技术分类、95 个 git submodule，覆盖向量库、关系型数据库、搜索引擎、
+15 个技术分类、95 个 git submodule，覆盖向量库、关系型数据库、搜索引擎、
 图数据库、时序数据库、消息队列等方向的上游实现。用于对照学习与源码检索。
 
 | 分类 | 说明 |
@@ -40,10 +40,26 @@
 ## 克隆
 
 ```bash
-git clone --recurse-submodules https://github.com/yinchengwang/reference.git
-# 或先克隆再初始化
-git submodule update --init --recursive --depth 1
+git clone https://github.com/yinchengwang/reference.git
 ```
+
+### ⚠️ 禁止 `git submodule update --init --recursive`
+
+本仓的 95 个第三方库都是 submodule，递归初始化会一次性拉取约 25 GB / 53.6 万文件。
+**不要**执行 `git clone --recurse-submodules`，也不要执行带 `--recursive` 的 submodule 初始化。
+
+按需拉取请用顶层聚合仓的脚本（脚本在**顶层仓** `StillEvolving` 里，不在本仓）：
+
+```bash
+cd ../StillEvolving          # 本仓与顶层仓平级
+bash scripts/fetch-reference.sh --name faiss      # 拉单个
+bash scripts/fetch-reference.sh --model vector    # 拉某个分类
+bash scripts/fetch-reference.sh --tier core       # 拉核心集
+bash scripts/fetch-reference.sh --check           # 只校验，不拉取
+```
+
+拉取地址与 pin 由 `reference/catalog.yml` 声明（`commit` / `clone_url` / `pin_status`），
+拉取记录见 `reference/fetch-manifest.txt`。
 
 ## 引用校验门禁
 

@@ -1,5 +1,8 @@
 # Dragonfly Wiki（现代多线程 Redis 兼容内存数据库）
 
+> ⚠️ **本文的行号引用当前无法校验。**
+> 原因：gitlink pin `dafb825b…` 在上游不存在。行号可能已随上游漂移，需人工重新校对后才能作为精确引用使用。
+
 > 参考版本：Dragonfly 仓库当前 commit `dafb825b0e5c6f0d8ce2836e1252a568fee639ff`（v1.x 系列；Dragonfly 1.0 GA 2023 年）。
 
 ## 一、项目定位

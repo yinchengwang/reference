@@ -98,3 +98,52 @@
 - ✅ hnswlib → `extension/`
 
 所有非数据库项目均正确归类到 `extension/` 或 `benchmark/`，不在关系型、键值等目录中。
+
+---
+
+## 2026-10-26 —— 清单驱动的按需拉取（catalog 四字段 + manifest 5 列）
+
+本仓的 95 个第三方库改为**清单驱动按需拉取**，取代递归克隆。
+
+### 清单
+
+- `reference/catalog.yml`：97 条，每条带 `commit` / `clone_url` / `pin_status` / `source` 四个字段
+  （其中 91 条 `valid`、4 条 `broken`、2 条 `unresolvable`；`source: mirror` 95 条）
+- `reference/fetch-manifest.txt`：由 catalog 生成的 5 列 lockfile
+  （`model` / `name` / `clone_url` / `commit` / `pin_status`，TAB 分隔，97 行数据）
+- 校验命令：`python scripts/sync_catalog.py --check`（一致退出 0，不一致退出 1）
+
+### 拉取结果（本次验收）
+
+| 项 | 结果 |
+|---|---|
+| 成功 | 1（faiss —— 唯一已 init 的库，HEAD 已在 pin 上，幂等跳过） |
+| 跳过 | 96（4 条 `broken` + 2 条 `unresolvable`，另有 90 条未按需拉取） |
+| 失败 | 0 |
+
+### 4 个失效 pin（只标注，不重选 commit）
+
+重选 commit 会让 102 处行号引用全体漂移，因此保留现状并在笔记顶部加校对警示：
+
+| 条目 | 失效原因 | 受影响笔记 |
+|---|---|---|
+| `druid` | gitlink pin `fa8dc991…` 在上游不存在 | `docs/db-wiki/columnar/druid.md` |
+| `pebble` | gitlink pin `68315f17…` 在上游不存在 | `docs/db-wiki/key-value/pebble.md`（4 处引用） |
+| `tdengine` | gitlink pin `62385b1e…` 在上游不存在 | `docs/db-wiki/time-series/tdengine.md`（75 处引用） |
+| `dragonfly` | gitlink pin `dafb825b…` 在上游不存在 | `docs/db-wiki/key-value/dragonfly.md`（2 处引用） |
+
+另有 `oceanbase`（`source: none`，无源码镜像，`docs/db-wiki/distributed-sql/oceanbase.md` 的 20 处引用无从校验）
+与 `mysql`（pin 本身有效，但旧 gitee 镜像不含它，已改用 GitHub 官方，21 处引用需复核）。
+
+### 拉取方式
+
+拉取脚本在顶层聚合仓 `StillEvolving/scripts/fetch-reference.sh`：
+
+```bash
+bash scripts/fetch-reference.sh --name faiss      # 拉单个
+bash scripts/fetch-reference.sh --model vector    # 拉某个分类
+bash scripts/fetch-reference.sh --tier core       # 拉核心集
+bash scripts/fetch-reference.sh --check           # 只校验，不拉取
+```
+
+⚠️ 禁止递归初始化 submodule（本仓有 95 个 submodule，递归会一次性拉取约 25 GB / 53.6 万文件）。

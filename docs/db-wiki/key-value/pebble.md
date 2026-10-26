@@ -1,5 +1,8 @@
 # Pebble Wiki（模块化 LSM 键值数据库 / CockroachDB 存储引擎）
 
+> ⚠️ **本文的行号引用当前无法校验。**
+> 原因：gitlink pin `68315f17…` 在上游不存在。行号可能已随上游漂移，需人工重新校对后才能作为精确引用使用。
+
 > 参考版本：Pebble 仓库当前 commit `68315f176d9e328a233ace29b7579a829f89879f`（v2.x 系列；Pebble 自 2020 年从 CockroachDB 剥离独立发展，2024 年由 Cockroach Labs 作为开源项目单独维护）。
 
 ## 一、项目定位
