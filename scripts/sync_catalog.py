@@ -24,10 +24,14 @@ MANIFEST_COLUMNS = ("model", "name", "clone_url", "commit", "pin_status")
 MANIFEST_HEADER = "# " + "\t".join(MANIFEST_COLUMNS)
 
 # 设计文档 §5.5.2 的一致性校验规则（1~9）里要检查的字段
-REQUIRED_KEYS = ("name", "model", "tier", "repository", "license", "status", "notes")
+REQUIRED_KEYS = ("name", "model", "tier", "repository", "license", "status", "notes",
+                 "commit", "clone_url", "pin_status", "source")
 PIN_STATUSES = ("valid", "broken", "unresolvable")
 SOURCES = ("mirror", "none")
 _SHA_RE = re.compile(r"[0-9a-f]{40}")
+# broken 条目的 notes 必须「说明失效原因」——用内容判定而不是数条目个数。
+# 一条写好的合并说明也算数，所以不要求 >= 2 条。
+_BREAKAGE_HINT_RE = re.compile(r"不存在|失效|not our ref|404|取不到|无此 commit")
 
 
 class CatalogError(Exception):
@@ -174,8 +178,11 @@ def _clone_url(entry):
 def compute_entries(repo_root):
     """算出补齐四字段后的条目列表（与磁盘上的 catalog 无关）。"""
     catalog_path = os.path.join(repo_root, CATALOG_RELPATH)
-    with open(catalog_path, "r", encoding="utf-8", newline="") as fh:
-        entries = parse_catalog(fh.read())
+    try:
+        with open(catalog_path, "r", encoding="utf-8", newline="") as fh:
+            entries = parse_catalog(fh.read())
+    except FileNotFoundError:
+        raise CatalogError("找不到 catalog：%s" % catalog_path)
     links = _gitlinks(repo_root)
     for entry in entries:
         name = entry.get("name")
@@ -362,7 +369,9 @@ def check_schema(entries):
         elif status == "broken":
             if commit is not None:
                 problems.append("! %s: pin_status=broken 但 commit 非空: %r" % (name, commit))
-            if not isinstance(notes, list) or len(notes) < 2:
+            if not isinstance(notes, list) or not notes:
+                problems.append("! %s: pin_status=broken 但 notes 为空" % name)
+            elif not _BREAKAGE_HINT_RE.search(" ".join(str(n) for n in notes)):
                 problems.append("! %s: pin_status=broken 但 notes 未说明失效原因与受影响的笔记" % name)
         elif status == "unresolvable":
             if source != "none":
@@ -396,11 +405,17 @@ def check_manifest(repo_root, entries=None):
     want_lines = _norm_eol(expected).split("\n")
     if disk_lines == want_lines:
         return []
+    problems = []
     for i, (got, want) in enumerate(zip(disk_lines, want_lines), 1):
         if got != want:
-            return ["! fetch-manifest.txt 第 %d 行不一致：磁盘 %r / 期望 %r" % (i, got, want)]
-    return ["! fetch-manifest.txt 行数不一致：磁盘 %d 行 / 期望 %d 行" % (
-        len(disk_lines), len(want_lines))]
+            problems.append("! fetch-manifest.txt 第 %d 行不一致：磁盘 %r / 期望 %r" % (i, got, want))
+            if len(problems) >= 5:
+                problems.append("! fetch-manifest.txt 更多差异已省略")
+                break
+    if len(disk_lines) != len(want_lines):
+        problems.append("! fetch-manifest.txt 行数不一致：磁盘 %d 行 / 期望 %d 行" % (
+            len(disk_lines), len(want_lines)))
+    return problems
 
 
 def summarize(entries):
@@ -439,21 +454,36 @@ def main(argv=None):
     try:
         entries = compute_entries(repo_root)
 
-        if args.write_manifest:
-            path = write_manifest(repo_root)
-            print("wrote %s" % path)
-
+        # 校验必须在重建之前做 —— 否则 --write-manifest 先把 manifest 改对，
+        # 再去校验就永远通过，--check 形同虚设。
+        check_rc = None
         if args.check:
+            # 校验「磁盘上的文件」，不是「脚本推导出来的值」——
+            # compute_entries 会用推导值覆盖 commit/clone_url/pin_status/source，
+            # 拿它做字段不变量检查就等于拿自己的期望检查自己，删掉一个 null 字段也发现不了。
+            with open(os.path.join(repo_root, CATALOG_RELPATH), "r",
+                      encoding="utf-8", newline="") as fh:
+                on_disk_entries = parse_catalog(fh.read())
             diff = sync_catalog(repo_root, apply=False)
-            problems = check_schema(entries) + check_manifest(repo_root, entries)
+            problems = check_schema(on_disk_entries) + check_manifest(repo_root, entries)
             if diff or problems:
                 print("校验未通过，%d 处问题：" % (len(diff) + len(problems)))
                 for line in (diff + problems)[:50]:
                     print("  " + line)
-                return 1
-            print(summarize(entries))
-            print(summarize_sources(entries))
-            return 0
+                check_rc = 1
+            else:
+                # stdout 必须逐字等于 "97 entries, 91 valid, 4 broken, 2 unresolvable"
+                print(summarize(entries))
+                # source 分布只是补充信息，走 stderr，别污染 stdout 的契约
+                print(summarize_sources(entries), file=sys.stderr)
+                check_rc = 0
+
+        if args.write_manifest:
+            path = write_manifest(repo_root)
+            print("wrote %s" % path)
+
+        if check_rc is not None:
+            return check_rc
 
         if args.apply:
             diff = sync_catalog(repo_root, apply=True)

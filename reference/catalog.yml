@@ -26,7 +26,7 @@ projects:
     notes:
       - 主流关系型数据库
       - pin 23e360a7fac718d80b9e6a79f7d5a7bf37aa3bbc 在 GitHub 官方真实存在，但旧 gitee 镜像不含它；clone_url 已改用 GitHub 官方并实测按 SHA 可拉
-      - 笔记 docs/db-wiki/relational/mysql.md 的 21 处行号引用当前无法校验，需人工复核
+      - 笔记 docs/db-wiki/relational/mysql.md 的 21 处行号引用需人工复核：pin 本身有效，但子模块未 init 时当前工作区无法逐行校验
   - name: sqlite3
     model: relational
     tier: core

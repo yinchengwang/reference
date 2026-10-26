@@ -87,6 +87,19 @@ class TestCheckSchema(unittest.TestCase):
     def test_broken_entry_with_explanation_passes(self):
         self.assertEqual(check_schema([self._entry()]), [])
 
+    def test_single_consolidated_note_is_enough(self):
+        """规则 3 看的是「有没有说明」，不是「有几条」——
+        一条写好的合并说明应当通过。"""
+        e = self._entry(notes=["pin 失效：上游 apache/druid 不存在该 commit，"
+                               "笔记 docs/db-wiki/columnar/druid.md 的行号引用需人工校对"])
+        self.assertEqual(check_schema([e]), [])
+
+    def test_note_without_breakage_explanation_is_rejected(self):
+        """两条 note 但都不说明失效原因 —— 仍然要报出来。"""
+        e = self._entry(notes=["时序数据库", "x"])
+        problems = check_schema([e])
+        self.assertTrue(any("notes" in p for p in problems), problems)
+
     def test_broken_entry_with_commit_is_rejected(self):
         """规则 3：broken 的 commit 必须为 null（不得照抄伪造 SHA）。"""
         problems = check_schema([self._entry(commit="a" * 40)])
@@ -254,8 +267,8 @@ class TestMainCheckExitCode(unittest.TestCase):
         return d
 
     def _run(self, repo):
-        buf = io.StringIO()
-        with contextlib.redirect_stdout(buf):
+        buf, err = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(err):
             rc = main(["--check", "--repo-root", repo])
         return rc, buf.getvalue()
 
@@ -299,10 +312,130 @@ class TestMainCheckExitCode(unittest.TestCase):
         with open(os.path.join(d, "reference", "catalog.yml"),
                   "w", encoding="utf-8", newline="") as fh:
             fh.write(self.CATALOG)
-        buf = io.StringIO()
-        with contextlib.redirect_stdout(buf):
+        buf, err = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(err):
             rc = main(["--check", "--repo-root", d])
         self.assertEqual(rc, 1)
+        self.assertNotIn("Traceback", err.getvalue())
+        self.assertIn("ERROR", err.getvalue())
+
+
+class TestCheckSeesTheFileNotTheDerivation(unittest.TestCase):
+    """check_schema 必须校验**磁盘上的文件**。
+
+    compute_entries 会用推导值覆盖 commit/clone_url/pin_status/source ——
+    拿推导值做不变量检查等于拿自己的期望检查自己，删掉一个 null 字段也发现不了。
+    """
+
+    SHA = "0123456789abcdef0123456789abcdef01234567"
+
+    def _repo(self, catalog_text, with_manifest=True):
+        d = tempfile.mkdtemp()
+        os.makedirs(os.path.join(d, "reference"))
+        with open(os.path.join(d, "reference", "catalog.yml"),
+                  "w", encoding="utf-8", newline="") as fh:
+            fh.write(catalog_text)
+        if with_manifest:
+            with open(os.path.join(d, "reference", "fetch-manifest.txt"),
+                      "w", encoding="utf-8", newline="") as fh:
+                fh.write(render_manifest([{
+                    "name": "x", "model": "vector",
+                    "clone_url": "https://example/x.git",
+                    "commit": self.SHA, "pin_status": "valid"}]))
+        subprocess.run(["git", "init", "-q", d], check=True, capture_output=True)
+        subprocess.run(["git", "-C", d, "update-index", "--add", "--cacheinfo",
+                        "160000,%s,reference/vector/x" % self.SHA],
+                       check=True, capture_output=True)
+        return d
+
+    def _broken_catalog(self, extra_line=""):
+        return (
+            "projects:\n"
+            "  - name: x\n"
+            "    model: vector\n"
+            "    tier: core\n"
+            "    repository: https://example/x.git\n"
+            "    license: MIT\n"
+            "    status: active\n"
+            + extra_line +
+            "    commit: null\n"
+            "    clone_url: https://example/x.git\n"
+            "    pin_status: broken\n"
+            "    source: mirror\n"
+            "    notes:\n"
+            "      - 说明\n"
+            "      - pin 失效：上游不存在该 commit，笔记需人工校对\n"
+        )
+
+    def _run(self, repo):
+        out, err = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            rc = main(["--check", "--repo-root", repo])
+        return rc, out.getvalue(), err.getvalue()
+
+    def test_deleting_commit_null_is_detected(self):
+        """broken 条目少了 commit 字段（null 被删掉）必须被发现。"""
+        d = self._repo(self._broken_catalog())
+        rc, out, err = self._run(d)
+        self.assertNotEqual(rc, 0, out)
+
+    def test_missing_catalog_reports_clean_error(self):
+        """catalog 不存在时报一行人话，不是 traceback。"""
+        d = tempfile.mkdtemp()
+        os.makedirs(os.path.join(d, "reference"))
+        rc, out, err = self._run(d)
+        self.assertEqual(rc, 1)
+        self.assertNotIn("Traceback", err)
+        self.assertIn("catalog", err)
+
+    def test_check_runs_before_write_manifest(self):
+        """--check --write-manifest 时校验必须针对重建前的状态，不能被自己写出来的
+        manifest 抵消成永远通过。"""
+        d = self._repo(self._broken_catalog(), with_manifest=False)
+        rc, out, err = self._run(d)
+        self.assertNotEqual(rc, 0, out)
+
+
+class TestCheckStdoutContract(unittest.TestCase):
+    """--check 的 stdout 必须逐字等于约定的那一行（source 分布走 stderr）。"""
+
+    SHA = "0123456789abcdef0123456789abcdef01234567"
+
+    def test_stdout_is_exactly_one_line(self):
+        d = tempfile.mkdtemp()
+        os.makedirs(os.path.join(d, "reference"))
+        with open(os.path.join(d, "reference", "catalog.yml"),
+                  "w", encoding="utf-8", newline="") as fh:
+            fh.write(
+                "projects:\n"
+                "  - name: x\n"
+                "    model: vector\n"
+                "    tier: core\n"
+                "    repository: https://example/x.git\n"
+                "    license: MIT\n"
+                "    status: active\n"
+                "    commit: %s\n"
+                "    clone_url: https://example/x.git\n"
+                "    pin_status: valid\n"
+                "    source: mirror\n"
+                "    notes:\n"
+                "      - 说明\n" % self.SHA)
+        with open(os.path.join(d, "reference", "fetch-manifest.txt"),
+                  "w", encoding="utf-8", newline="") as fh:
+            fh.write(render_manifest([{
+                "name": "x", "model": "vector", "clone_url": "https://example/x.git",
+                "commit": self.SHA, "pin_status": "valid"}]))
+        subprocess.run(["git", "init", "-q", d], check=True, capture_output=True)
+        subprocess.run(["git", "-C", d, "update-index", "--add", "--cacheinfo",
+                        "160000,%s,reference/vector/x" % self.SHA],
+                       check=True, capture_output=True)
+        out, err = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            rc = main(["--check", "--repo-root", d])
+        self.assertEqual(rc, 0)
+        self.assertEqual(out.getvalue().strip(),
+                         "1 entries, 1 valid, 0 broken, 0 unresolvable")
+        self.assertIn("mirror", err.getvalue())
 
 
 if __name__ == "__main__":
