@@ -36,8 +36,8 @@ git reset --hard origin/main
 
 ## 来源
 
-完整的元数据登记在仓库根的 [`reference/catalog.yml`](../catalog.yml) 中，以 `model: ai/agent` 字段标记。
+完整的元数据登记在仓库根的 [`reference/catalog.yml`](../../catalog.yml) 中，以 `model: ai/agent` 字段标记。
 
 ## 注意事项
 
-- 部分克隆（agixt、chatdev、crewai、llama-index）首次拉取时可能因网络抖动中断，请直接重试 `git clone --depth 1 <url> <path>`；本任务已在 `task-2-report.md` 中记录。
+- 部分克隆（agixt、chatdev、crewai、llama-index）首次拉取时可能因网络抖动中断，请直接重试 `git clone --depth 1 <url> <path>`；本任务的拉取记录见 [`reference/AUDIT.md`](../../AUDIT.md)。

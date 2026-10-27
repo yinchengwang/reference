@@ -34,4 +34,4 @@ git reset --hard origin/main
 
 ## 来源
 
-完整的元数据登记在仓库根的 [`reference/catalog.yml`](../catalog.yml) 中，以 `model: ai/rag` 字段标记。
+完整的元数据登记在仓库根的 [`reference/catalog.yml`](../../catalog.yml) 中，以 `model: ai/rag` 字段标记。

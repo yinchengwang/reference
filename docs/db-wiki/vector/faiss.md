@@ -642,7 +642,7 @@ centroids 分配 d * ksub 个 float      (faiss/impl/ProductQuantizer.cpp:71)
 
 ```
 for m in 0 .. M-1:
-    xslice[j] = x[j][m*dsub : (m+1)*dsub]      # strided 切片，faiss/impl/ProductQuantizer.cpp:145-150
+    xslice[j] = x[j][m*dsub : (m+1)*dsub]      # strided 切片，faiss/impl/ProductQuantizer.cpp:145-149
     clus = Clustering(dsub, ksub, cp)          # faiss/impl/ProductQuantizer.cpp:151
     clus.train(n, xslice, IndexFlatL2(dsub))  # faiss/impl/ProductQuantizer.cpp:188
     set_params(clus.centroids, m)             # faiss/impl/ProductQuantizer.cpp:189
