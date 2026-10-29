@@ -438,5 +438,78 @@ class TestCheckStdoutContract(unittest.TestCase):
         self.assertIn("mirror", err.getvalue())
 
 
+class TestManifestColumnInvariant(unittest.TestCase):
+    """manifest 是定宽 5 列 lockfile —— 值里含 TAB/CR/LF 必须 fail loud，不能静默变 6 列。"""
+
+    def _entry(self, **kw):
+        base = {"name": "faiss", "model": "vector",
+                "clone_url": "https://example/faiss.git",
+                "commit": "0" * 40, "pin_status": "valid"}
+        base.update(kw)
+        return base
+
+    def test_tab_in_value_is_rejected(self):
+        with self.assertRaises(ValueError):
+            render_manifest([self._entry(name="fa\tiss")])
+
+    def test_newline_in_value_is_rejected(self):
+        with self.assertRaises(ValueError):
+            render_manifest([self._entry(clone_url="https://example/a\nb.git")])
+
+    def test_cr_in_value_is_rejected(self):
+        with self.assertRaises(ValueError):
+            render_manifest([self._entry(clone_url="https://example/a\rb.git")])
+
+    def test_schema_flags_tab_before_render_blows_up(self):
+        """check_schema 要在 render_manifest 抛栈之前给出可读的问题描述。"""
+        problems = check_schema([self._entry(name="fa\tiss")])
+        self.assertTrue(any("TAB/CR/LF" in p for p in problems), problems)
+
+    def test_clean_values_still_render_five_columns(self):
+        row = render_manifest([self._entry()]).split("\n")[1].split("\t")
+        self.assertEqual(len(row), 5)
+
+
+class TestCheckManifestReportsAllDiffs(unittest.TestCase):
+    """不能只报前 5 处差异 —— 那样会让人误以为 manifest 只错了几行。"""
+
+    ENTRIES = [{
+        "name": "lib%02d" % i, "model": "vector",
+        "clone_url": "https://example/lib%02d.git" % i,
+        "commit": "%040d" % i, "pin_status": "valid",
+    } for i in range(10)]
+
+    def test_all_differences_are_reported(self):
+        d = tempfile.mkdtemp()
+        os.makedirs(os.path.join(d, "reference"))
+        # 10 条数据行全部改坏（表头不含 lib/vector，保持原样）→ 10 处差异，远超旧实现的 5 处上限
+        good = render_manifest(self.ENTRIES)
+        bad = good.replace("lib", "XXX").replace("vector", "VEC")
+        with open(os.path.join(d, "reference", "fetch-manifest.txt"),
+                  "w", encoding="utf-8", newline="") as fh:
+            fh.write(bad)
+        problems = check_manifest(d, self.ENTRIES)
+        diff_lines = [p for p in problems if "行不一致" in p]
+        self.assertEqual(len(diff_lines), 10, problems)
+        self.assertFalse(any("已省略" in p for p in problems), problems)
+
+
+class TestNotesWithPunctuation(unittest.TestCase):
+    """notes 里的引号 / 冒号 / 逗号不能把 YAML 列表切坏。"""
+
+    def test_quotes_colons_commas_in_notes(self):
+        text = ('projects:\n'
+                '  - name: x\n'
+                '    model: vector\n'
+                '    notes:\n'
+                '      - 说明："引号" 与 冒号: 与 逗号, 混在一起\n'
+                '      - 第二条：带中文冒号\n')
+        entries = parse_catalog(text)
+        self.assertEqual(len(entries), 1)
+        self.assertEqual(len(entries[0]["notes"]), 2)
+        self.assertIn("冒号", entries[0]["notes"][0])
+        self.assertIn("逗号", entries[0]["notes"][0])
+
+
 if __name__ == "__main__":
     unittest.main()

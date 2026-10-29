@@ -119,13 +119,26 @@ def render_manifest(entries):
 
     列：model<TAB>name<TAB>clone_url<TAB>commit<TAB>pin_status
     首行为 '#' 开头的表头注释。空值写 '-'。
+
+    值里不允许出现 TAB / CR / LF —— 它们会让该行变成 6 列，破坏 lockfile 的
+    定宽不变量。当前 catalog 数据不可达，但一旦可达就是**静默损坏**，所以这里
+    直接抛 ValueError（fail loud）；`check_schema` 会在更早的位置给出可读的问题
+    描述，使 `--check` 以退出码 1 收场而不是抛栈。
     """
     lines = [MANIFEST_HEADER]
     for entry in entries:
         row = []
         for col in MANIFEST_COLUMNS:
             value = entry.get(col)
-            row.append("-" if value is None or value == "" else str(value))
+            if value is None or value == "":
+                row.append("-")
+                continue
+            text = str(value)
+            if any(ch in text for ch in ("\t", "\r", "\n")):
+                raise ValueError(
+                    "%s: 字段 %s 含 TAB/CR/LF，无法安全写入 manifest: %r"
+                    % (entry.get("name") or "<未命名条目>", col, text))
+            row.append(text)
         lines.append("\t".join(row))
     return "\n".join(lines) + "\n"
 
@@ -350,6 +363,13 @@ def check_schema(entries):
             if key not in entry:
                 problems.append("! %s: 缺少必填字段 %s" % (name, key))
 
+        # 含 TAB/CR/LF 的字段会破坏 manifest 的定宽列（见 render_manifest）
+        for key in MANIFEST_COLUMNS:
+            value = entry.get(key)
+            if isinstance(value, str) and any(ch in value for ch in ("\t", "\r", "\n")):
+                problems.append("! %s: 字段 %s 含 TAB/CR/LF，会破坏 manifest 的定宽列: %r"
+                                % (name, key, value))
+
         status = entry.get("pin_status")
         source = entry.get("source")
         commit = entry.get("commit")
@@ -409,9 +429,6 @@ def check_manifest(repo_root, entries=None):
     for i, (got, want) in enumerate(zip(disk_lines, want_lines), 1):
         if got != want:
             problems.append("! fetch-manifest.txt 第 %d 行不一致：磁盘 %r / 期望 %r" % (i, got, want))
-            if len(problems) >= 5:
-                problems.append("! fetch-manifest.txt 更多差异已省略")
-                break
     if len(disk_lines) != len(want_lines):
         problems.append("! fetch-manifest.txt 行数不一致：磁盘 %d 行 / 期望 %d 行" % (
             len(disk_lines), len(want_lines)))
